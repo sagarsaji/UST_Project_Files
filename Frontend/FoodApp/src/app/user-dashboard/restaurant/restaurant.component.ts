@@ -42,7 +42,6 @@ export class RestaurantComponent {
   }
 
   fetchSpecificRestaurantMenu(restname: string): void {
-    // this.checkLogin();
     this.restService.getAllMenu().subscribe(data => {
       this.menu = data.filter(menuItem => menuItem.restname === restname);
       console.log(this.menu);
@@ -50,14 +49,14 @@ export class RestaurantComponent {
     });
   }
 
-  checkLogin(){
-    if(!this.service.isAuthenticated()){
-      this.router.navigateByUrl('/login');
-    }
-    else{
-      this.fetchSpecificRestaurantMenu(this.restname);
-    }
-  }
+  // checkLogin(){
+  //   if(!this.service.isAuthenticated()){
+  //     this.router.navigateByUrl('/login');
+  //   }
+  //   else{
+  //     this.fetchSpecificRestaurantMenu(this.restname);
+  //   }
+  // }
   
   private getProductall(){
     this.restService.getRest().subscribe(data => {

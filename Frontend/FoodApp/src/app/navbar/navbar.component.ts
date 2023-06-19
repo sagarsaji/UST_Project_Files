@@ -11,13 +11,16 @@ export class NavbarComponent {
 
   constructor(private service:AuthenticateServiceService,private router:Router){}
   
-
-  checkLogin(){
-    if(!this.service.isAuthenticated()){
-      this.router.navigateByUrl('/login');
-    }
-    else{
-      this.router.navigateByUrl('/menu');
+  isLoggedIn = true;
+ 
+  toggleLogin() {
+    if (this.isLoggedIn) {
+      // Perform logout logic if needed
+      this.isLoggedIn = false;
+      this.router.navigate(['/user']);
+    } else {
+      this.isLoggedIn = true;
+      this.router.navigate(['/login']);
     }
   }
 

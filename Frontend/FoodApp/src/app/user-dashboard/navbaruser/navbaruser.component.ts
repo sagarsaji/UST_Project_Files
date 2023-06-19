@@ -20,4 +20,16 @@ export class NavbaruserComponent {
   //   }
   // }
 
+  isLoggedIn = true;
+ 
+  toggleLogin() {
+    if (this.isLoggedIn) {
+      this.isLoggedIn = false;
+      this.router.navigate(['/user']);
+    } else {
+      this.isLoggedIn = true;
+      this.router.navigate(['/login']);
+    }
+  }
+
 }

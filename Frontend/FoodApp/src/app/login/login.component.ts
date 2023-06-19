@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AppComponent } from '../app.component';
 import { Login } from '../modal/login';
 import { AuthenticateServiceService } from '../service/authenticate-service.service';
 import { RouterServiceService } from '../service/router-service.service';
@@ -19,8 +18,7 @@ export class LoginComponent implements OnInit {
   usertype!: String;
 
   constructor(private routerService: RouterServiceService, 
-    private authservice: AuthenticateServiceService,private route:Router,
-    private log: AppComponent) {
+    private authservice: AuthenticateServiceService,private route:Router) {
 
     this.loginForm = new FormGroup({
       username: new FormControl(),
@@ -29,9 +27,9 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (sessionStorage.getItem('key') != null) {
-      this.routerService.tohome();
-    }
+    // if (sessionStorage.getItem('key') != null) {
+    //   this.routerService.tohome();
+    // }
   }
 
   userid!:number;
@@ -70,7 +68,6 @@ export class LoginComponent implements OnInit {
             alert('You have entered incorrect Details');
           }
         )
-        console.log("thiss is " + this.usertype);
       }
     },
     error => {

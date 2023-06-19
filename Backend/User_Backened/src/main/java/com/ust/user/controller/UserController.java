@@ -38,6 +38,10 @@ public class UserController {
 		if(user.getRestname()!=null){
 			user.setType("kitchen staff");
 		}
+		else{
+			user.setType("user");
+		}
+
 		User newUser = new User(user.getName(), user.getUsername(), encodedPassword, user.getEmail(),
 				user.getAddress(), user.getPhone(), encodedPassword, user.getType(), user.getRestname());
 

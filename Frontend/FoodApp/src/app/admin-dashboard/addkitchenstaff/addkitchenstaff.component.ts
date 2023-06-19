@@ -51,7 +51,7 @@ export class AddkitchenstaffComponent implements OnInit{
       this.authser.addUser(this.signup).subscribe(
         (data) => {
           console.log(data);
-          this.router.navigate(['/admin']);
+          this.router.navigate(['/product']);
         },
         (error) => console.log(error)
       );
