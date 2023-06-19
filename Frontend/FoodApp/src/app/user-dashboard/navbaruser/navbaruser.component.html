@@ -1,0 +1,27 @@
+<script
+    src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8="
+    crossorigin="anonymous"></script>
+    <script>
+    $(function() {
+    $(".toggle").on("click", function() {
+        if ($(".item").hasClass("active")) {
+            $(".item").removeClass("active");
+        } else {
+            $(".item").addClass("active");
+        }
+    });
+});
+    </script>
+ <nav>
+  <ul class="menu">
+      <li class="logo"><a href="#">MealsDrop</a></li>
+      <li class="item"><a href="#">Home</a></li>
+      <li class="item"><a href="#" routerLink="/about">About</a></li>
+      <!-- <li class="item"><a href="#">Services</a></li> -->
+      
+      <li class="item button"><a href="#" routerLink="/login">Log In</a></li>
+      <li class="item button secondary"><a href="#">Sign Up</a></li>
+      <li class="toggle"><span class="bars"></span></li>
+  </ul>
+</nav>
