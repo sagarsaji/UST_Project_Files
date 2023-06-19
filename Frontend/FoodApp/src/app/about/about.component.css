@@ -1,29 +1,15 @@
-.section-title {
-    font-size: 2rem;
-    font-weight: bold;
-    text-transform: uppercase;
-    margin-bottom: 2rem;
-  }
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 20px;
+}
+h1 {
+text-align: left;
+font-size: 30px;
+margin-bottom: 20px;
+}
 
-  .service-item {
-    padding: 1.5rem;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
-  }
-
-  .service-icon {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-  }
-
-  .service-title {
-    font-size: 1.5rem;
-    font-weight: bold;
-    margin-bottom: 0.5rem;
-  }
-
-  .service-description {
-    font-size: 1rem;
-    color: #666;
-  }
+p {
+text-align: justify;
+margin-bottom: 15px;
+}

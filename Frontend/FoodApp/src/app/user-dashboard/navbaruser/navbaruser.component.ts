@@ -28,6 +28,7 @@ export class NavbaruserComponent {
       this.router.navigate(['/user']);
     } else {
       this.isLoggedIn = true;
+      localStorage.removeItem('token');
       this.router.navigate(['/login']);
     }
   }

@@ -59,11 +59,11 @@
     border-radius: 5px;
 }
 
-.content a:hover 
+/* .content a:hover 
 {
     background-color: var(--primary-color);
     color: #fff;
-}
+} */
 
 .stepBox 
 {

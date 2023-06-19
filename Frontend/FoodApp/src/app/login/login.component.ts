@@ -51,6 +51,7 @@ export class LoginComponent implements OnInit {
 
       if (data != null) {
         sessionStorage.setItem("key", this.submitMessage);
+        
         this.flag = true;
         
         this.authservice.getUserByUsername(this.login.username).subscribe(
