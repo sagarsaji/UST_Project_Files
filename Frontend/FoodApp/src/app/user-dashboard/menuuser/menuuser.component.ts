@@ -4,6 +4,7 @@ import { LoginComponent } from 'src/app/login/login.component';
 import { Addtocart } from 'src/app/modal/addtocart';
 import { Menu } from 'src/app/modal/menu';
 import { RestaurantService } from 'src/app/service/restaurant.service';
+import { SharedmenuserviceService } from 'src/app/service/sharedmenuservice.service';
 
 @Component({
   selector: 'app-menuuser',
@@ -24,7 +25,8 @@ export class MenuuserComponent {
   cart:Addtocart[] = [];
 
   constructor(private restService:RestaurantService,
-    private router: Router,private route:ActivatedRoute){}
+    private router: Router,private route:ActivatedRoute,
+    private sharedMenu:SharedmenuserviceService){}
 
   ngOnInit(): void {
     this.restn=this.route.snapshot.params['restname'];
@@ -42,8 +44,16 @@ export class MenuuserComponent {
   }
 
   pushtomenu(menuItem: Menu) {
-    this.newmenu.push(menuItem);
+    this.sharedMenu.addToMenu(menuItem);
     console.log(this.newmenu);
+  }
+
+  getMenuItems(): Menu[] {
+    return this.sharedMenu.getMenu();
+  }
+
+  clearMenu() {
+    this.menu = [];
   }
   
 
