@@ -15,12 +15,13 @@ export class MenuuserComponent {
   quantity: number = 0;
 
   menu: Menu[] = [];
+  newmenu: Menu[] = [];
   cartarray!: any;
   restaurant!: String;
   restn: any;
   restname: any;
   userid!: number;
-  cart:Addtocart = new Addtocart();
+  cart:Addtocart[] = [];
 
   constructor(private restService:RestaurantService,
     private router: Router,private route:ActivatedRoute){}
@@ -37,19 +38,24 @@ export class MenuuserComponent {
     this.restService.getAllMenu().subscribe(data => {
       this.menu = data.filter(menuItem => menuItem.restname === restname);
       console.log(this.menu);
-      this.router.navigate(['viewmenuuser', restname]);
     });
   }
 
-
-
-  addtocart(){
-    // this.userid = this.logg.userid;
-    this.restService.toCart(this.cart).subscribe(data => {
-      this.cartarray = data;
-      console.log(data);
-      //this.router.navigate(['addtocart',this.userid]);
-    })
+  pushtomenu(menuItem: Menu) {
+    this.newmenu.push(menuItem);
+    console.log(this.newmenu);
   }
+  
+
+
+
+  // addtocart(){
+  //   // this.userid = this.logg.userid;
+  //   this.restService.toCart(this.cart).subscribe(data => {
+  //     this.cartarray = data;
+  //     console.log(data);
+  //     //this.router.navigate(['addtocart',this.userid]);
+  //   })
+  // }
 
 }

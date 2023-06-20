@@ -18,7 +18,7 @@
       </div>
   
       <div>
-        <button class="btn btn-outline-success" >
+        <button class="btn btn-outline-success" (click)="pushtomenu(menuItem)">
        &nbsp;    Add  &nbsp;
   
         </button>
@@ -45,14 +45,10 @@
       <div>
   
         <div class="foods-count"  style="margin-bottom: 100px;">
-          <ol>
+          <ol *ngFor="let menuI of newmenu">
   
-            <li>Chicken curry</li>
-            <li>Vegetable curry</li>
-            <li>Chicken curry</li>
-            <!-- <li>Vegetable curry</li>
-            <li>Chicken curry</li> -->
-  
+            <li>{{menuI.mname}}</li>
+            
           </ol>
         </div>
   

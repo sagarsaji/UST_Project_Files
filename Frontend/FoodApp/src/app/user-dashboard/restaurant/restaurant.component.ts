@@ -28,14 +28,9 @@ export class RestaurantComponent {
    private router: Router,
     private route:ActivatedRoute,private service:AuthenticateServiceService){}
   ngOnInit(): void {
-//     this.restData=this.restService.getRest();
-//     console.log(this.restData);
-  
-// this.filteredData=[...this.restData];
 
     this.getProductall();
    
-    //this.fetchSpecificRestaurantMenu(this.);
     this.restn=this.route.snapshot.params['restname'];
     this.restname = this.restn;
     this.fetchSpecificRestaurantMenu(this.restname);
@@ -46,21 +41,18 @@ export class RestaurantComponent {
       this.menu = data.filter(menuItem => menuItem.restname === restname);
       console.log(this.menu);
       this.router.navigate(['viewmenuuser', restname]);
-       //this.router.navigate(['viewmenuuser', { restname: restname }]);
-      //this.router.navigateByUrl(`/viewmenuuser/${restname}`);
-
 
     });
   }
 
-  // checkLogin(){
-  //   if(!this.service.isAuthenticated()){
-  //     this.router.navigateByUrl('/login');
-  //   }
-  //   else{
-  //     this.fetchSpecificRestaurantMenu(this.restname);
-  //   }
-  // }
+  checkLogin(restaurant: Restaurant):void{
+    if(!this.service.isAuthenticated()){
+      this.router.navigate(['/login']);
+    }
+    else{
+      this.fetchSpecificRestaurantMenu(restaurant.restName);
+    }
+  }
   
   private getProductall(){
     this.restService.getRest().subscribe(data => {
