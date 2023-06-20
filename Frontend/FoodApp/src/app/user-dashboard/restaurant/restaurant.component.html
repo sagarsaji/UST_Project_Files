@@ -2,9 +2,9 @@
     <h1 style="font-style: italic; margin-bottom: 30px; text-shadow: 30px;
 text-align: center; text-decoration: underline;">Our Restaurant</h1>
     <div class="container">
-      <div class="row" >
+      <div class="row">
         <div class="col-md-4"  *ngFor="let restaurant of rest">
-          <div class="card">
+          <div class="card" (click)="toggleMenu()">
             <img src="{{restaurant.restPic}}" class="card-img-top" alt="Image 1" (click)="fetchSpecificRestaurantMenu(restaurant.restName)" >
             <div class="card-body">
               <h5 class="card-title"  style="text-align: center;"

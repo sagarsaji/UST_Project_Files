@@ -20,15 +20,14 @@ export class NavbaruserComponent {
   //   }
   // }
 
-  isLoggedIn = true;
+  isLoggedIn = false;
  
   toggleLogin() {
-    if (this.isLoggedIn) {
-      this.isLoggedIn = false;
+    if (!this.isLoggedIn) {
+      this.isLoggedIn = true;
       this.router.navigate(['/user']);
     } else {
-      this.isLoggedIn = true;
-      localStorage.removeItem('token');
+      this.isLoggedIn = false;
       this.router.navigate(['/login']);
     }
   }

@@ -65,6 +65,18 @@ export class RestaurantComponent {
 
     });
   }
+
+  isLogged = false;
+ 
+  toggleMenu() {
+    if (!this.isLogged) {
+      this.isLogged = true;
+      this.fetchSpecificRestaurantMenu(this.restname);
+    } else {
+      this.isLogged = false;
+      this.router.navigate(['/login']);
+    }
+  }
   
   
   
