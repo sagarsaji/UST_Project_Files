@@ -34,7 +34,7 @@ const routes: Routes = [
   {path:'addmenu',component:AddmenuComponent},
   {path:'menu',component:MenuComponent},
   {path:'viewmenu/:restname',component:SpecificmenuComponent},
-  {path:'addtocart/:userid',component:AddtocartComponent},
+  {path:'addtocart',component:AddtocartComponent},
   {path:'update/:id',component:UpdateComponent},
   {path:'addkitchenstaff',component:AddkitchenstaffComponent},
   {path:`menuupdate/:mid`,component:MenuupdateComponent},
