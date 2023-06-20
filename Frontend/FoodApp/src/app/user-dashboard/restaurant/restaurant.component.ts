@@ -46,6 +46,10 @@ export class RestaurantComponent {
       this.menu = data.filter(menuItem => menuItem.restname === restname);
       console.log(this.menu);
       this.router.navigate(['viewmenuuser', restname]);
+       //this.router.navigate(['viewmenuuser', { restname: restname }]);
+      //this.router.navigateByUrl(`/viewmenuuser/${restname}`);
+
+
     });
   }
 
@@ -66,17 +70,16 @@ export class RestaurantComponent {
     });
   }
 
-  isLogged = false;
+  // isLogged = false;
  
-  toggleMenu() {
-    if (!this.isLogged) {
-      this.isLogged = true;
-      this.fetchSpecificRestaurantMenu(this.restname);
-    } else {
-      this.isLogged = false;
-      this.router.navigate(['/login']);
-    }
-  }
+  // toggleMenu() {
+  //   if (!this.isLogged) {
+  //     this.router.navigate(['/login']);
+  //   } else {
+  //     this.isLogged = true;
+  //     this.fetchSpecificRestaurantMenu(this.restname);
+  //   }
+  // }
   
   
   

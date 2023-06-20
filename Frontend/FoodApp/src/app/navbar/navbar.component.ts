@@ -11,7 +11,7 @@ export class NavbarComponent {
 
   constructor(private service:AuthenticateServiceService,private router:Router){}
   
-  isLoggedIn = true;
+  isLoggedIn = this.service.isAuthenticated();
  
   toggleLogin() {
     if (this.isLoggedIn) {

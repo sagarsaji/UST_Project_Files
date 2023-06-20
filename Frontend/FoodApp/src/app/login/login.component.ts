@@ -15,11 +15,15 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   submitMessage!: string;
   flag: boolean = false;
-  usertype!: String;
+  usertype!: string;
+  userid!: any;
+  private isAuthenticated = false;
 
-  constructor(private routerService: RouterServiceService, 
-    private authservice: AuthenticateServiceService,private route:Router) {
-
+  constructor(
+    private routerService: RouterServiceService,
+    private authservice: AuthenticateServiceService,
+    private route: Router
+  ) {
     this.loginForm = new FormGroup({
       username: new FormControl(),
       password: new FormControl(),
@@ -27,53 +31,70 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // if (sessionStorage.getItem('key') != null) {
-    //   this.routerService.tohome();
-    // }
+    this.isAuthenticated = !!localStorage.getItem('token');
+    this.retrieveUserId();
   }
 
-  userid!:number;
-
   onSubmit() {
-    console.log("hi from loginsubmit");
     this.login.username = this.loginForm.value.username;
     this.login.password = this.loginForm.value.password;
 
     this.submitMessage = this.loginForm.value.username;
 
-    console.log("Login Submit: " + this.loginForm.value);
+    this.authservice.getusers(this.login).subscribe(
+      (data) => {
+        this.authservice.setBearerToken(data['token']);
 
-    this.authservice.getusers(this.login).subscribe((data) => {
-      
-      this.authservice.setBearerToken(data['token']);
-      
-      console.log(data);
+        if (data != null) {
+          localStorage.setItem('token', this.submitMessage);
 
-      if (data != null) {
-        sessionStorage.setItem("key", this.submitMessage);
-        
-        this.flag = true;
-        
-        this.authservice.getUserByUsername(this.login.username).subscribe(
-          (response:any) => {
-            this.usertype = response.type;
-            if(this.usertype == 'user'){
-              this.route.navigate(['/user']);
+          this.flag = true;
+
+          this.authservice.getUserByUsername(this.login.username).subscribe(
+            (response: any) => {
+              if (response.token) {
+                this.setAuthenticated(true);
+              }
+              this.userid = response.id;
+              localStorage.setItem('userid', this.userid);
+
+              this.usertype = response.type;
+              if (this.usertype == 'user') {
+                this.route.navigate(['/user']);
+              } else {
+                alert('You are not authorized to login.');
+              }
+            },
+            (error) => {
+              console.log('error');
+              alert('You have entered incorrect details.');
             }
-            else{
-              alert("You are not authorized to Login");
-            }
-          },
-          error => {
-            console.log("error");
-            alert('You have entered incorrect Details');
-          }
-        )
+          );
+        }
+      },
+      (error) => {
+        console.log('error');
+        alert('You have entered incorrect username or password!');
       }
-    },
-    error => {
-      console.log("error");
-      alert('You have entered incorrect Username or Password!');
-    });
+    );
+  }
+
+  isAuthenticatedUser() {
+    return this.isAuthenticated;
+  }
+
+  setAuthenticated(status: boolean): void {
+    this.isAuthenticated = status;
+  }
+
+  logout() {
+    this.setAuthenticated(false);
+    localStorage.removeItem('token');
+    this.route.navigate(['/login']);
+  }
+
+  retrieveUserId() {
+    this.userid = sessionStorage.getItem('userid');
+    console.log('Retrieved User ID:', this.userid);
   }
 }

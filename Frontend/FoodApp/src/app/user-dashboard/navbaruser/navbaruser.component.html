@@ -16,13 +16,15 @@
  <nav>
   <ul class="menu">
       <li class="logo"><a href="#">MealsDrop</a></li>
-      <li class="item"><a href="#">Home</a></li>
+      <li class="item"><a href="#" routerLink="/user">Home</a></li>
       <li class="item"><a href="#" routerLink="/about">About</a></li>
       <li class="item"><a href="#" routerLink="/addtocart">Cart</a></li>
      
-      <li class="item button"><button class="nav-link btn solid-button" (click)="toggleLogin()">
-        {{ isLoggedIn ? 'Login' : 'Logout' }}
-      </button></li>
+      <li class="item button">
+        <button *ngIf="!isLoggedIn()" class="nav-link btn solid-button" (click)="toggleLogin()">Login</button>
+        <button *ngIf="isLoggedIn()" class="nav-link btn solid-button" (click)="toggleLogin()">Logout</button>
+      </li>
       <li class="toggle"><span class="bars"></span></li>
+
   </ul>
 </nav>

@@ -43,7 +43,7 @@ export class AdminloginComponent {
       console.log(data);
 
       if (data != null) {
-        sessionStorage.setItem("key", this.submitMessage);
+        localStorage.setItem("key", this.submitMessage);
         this.flag = true;
         
         if(this.login.username == 'admin' && this.login.password == 'admin'){

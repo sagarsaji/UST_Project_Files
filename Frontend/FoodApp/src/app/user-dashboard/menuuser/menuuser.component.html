@@ -2,51 +2,63 @@
 <app-banner></app-banner>
 <h1>Available Items</h1>
 <div  class="container">
-    
-    <ul>
-        
-      <li  *ngFor="let menuItem of menu">
-        <div>
-          <img src="{{menuItem.mpic}}" alt="" >
-        </div>
-        <div>
-          {{menuItem.mname}}
-        </div>
-        <div>
-          ₹ {{menuItem.mprice}}
-        </div>
-        <div>
-          <button class="btn btn-outline-success" >
-         &nbsp;    Add  &nbsp; 
-          </button>
-        </div>
+  <ul>
+    <li  *ngFor="let menuItem of menu">
 
-        <div>
-          <button class="btn btn-outline-danger" >
-            Remove
-          </button>
-        </div>
-    
-      </li>
-    
-    </ul>
-    
-    <div class="checkout">
       <div>
-        <div class="foods-count">Menu</div>
-    
-        <ul>
-          <li>Chicken curry</li>
-          <li>Vegetable curry</li>
-        </ul>
-    
+        <img src="{{menuItem.mpic}}" alt="" >
       </div>
-    
-    
-    
-    
-      <a>Add Cart</a>
-    
-    </div>
-    
-    </div>
+  
+      <div>
+        {{menuItem.mname}}
+      </div>
+  
+      <div>
+        ₹ {{menuItem.mprice}}
+      </div>
+  
+      <div>
+        <button class="btn btn-outline-success" >
+       &nbsp;    Add  &nbsp;
+  
+        </button>
+      
+      </div>
+  
+      <div>
+
+        <button class="btn btn-outline-danger" >
+          Remove
+        </button>
+  
+      </div>
+  
+    </li>
+  
+  </ul>
+  
+  <div class="checkout">
+  
+      <div class="foods-count" style=" font-size: 1.4rem;
+      font-weight: 700;">Menu</div>
+  
+      <div>
+  
+        <div class="foods-count"  style="margin-bottom: 100px;">
+          <ol>
+  
+            <li>Chicken curry</li>
+            <li>Vegetable curry</li>
+            <li>Chicken curry</li>
+            <!-- <li>Vegetable curry</li>
+            <li>Chicken curry</li> -->
+  
+          </ol>
+        </div>
+  
+      </div>
+  
+    <a>Add Cart</a>
+  
+  </div>
+  </div>

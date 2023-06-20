@@ -34,7 +34,7 @@ export class SignupComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    if (sessionStorage.getItem('key') != null) {
+    if (localStorage.getItem('key') != null) {
       this.routerService.tohome();  
     }
     else {
