@@ -1,13 +1,13 @@
 export class Addtocart {
 
-    cartid!: number;
+    
 	mpic!: string;
-	mprice!: number;
+	mprice!: string;
 	mid!: number;
 	mname!: string;
 	quantity!:number;
 	restname!: string;
 	status!: string;
-	userid!: number;
+	userid!: any;
   
 }

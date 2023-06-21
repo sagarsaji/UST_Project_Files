@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Menu } from '../modal/menu';
+import { LoginComponent } from '../login/login.component';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,14 @@ export class SharedmenuserviceService {
   }
 
   clearMenu() {
-    this.newmenu = [];
+    this.newmenu.pop();
+  }
+
+  private logg!: LoginComponent;
+
+
+  getuserid(){
+    return this.logg.retrieveUserId();
   }
 
 }

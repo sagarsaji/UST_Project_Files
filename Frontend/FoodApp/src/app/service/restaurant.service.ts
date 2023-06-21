@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Addtocart } from '../modal/addtocart';
 import { Menu } from '../modal/menu';
 import { Restaurant } from '../modal/restaurant';
+import { LoginComponent } from '../login/login.component';
 
 @Injectable({
   providedIn: 'root'
@@ -64,6 +65,7 @@ export class RestaurantService {
   updateMenu(mid:number,menu:Menu):Observable<Object>{
     return this.http.put(`http://localhost:8080/rest/menu/update/${mid}`,menu);
   }
+
   
   
 
