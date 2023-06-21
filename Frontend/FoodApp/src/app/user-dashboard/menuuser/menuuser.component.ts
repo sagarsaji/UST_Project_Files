@@ -53,7 +53,7 @@ export class MenuuserComponent {
   }
 
   clearMenu() {
-    this.sharedMenu.clearMenu();
+    this.sharedMenu.clearMenu()
   }
   
 
