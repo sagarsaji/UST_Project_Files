@@ -20,6 +20,7 @@ export class MenuuserComponent {
   restn: any;
   restname: any;
   cart!: Addtocart;
+  cartarray:Addtocart[] = []
  
   useridd: string | null = null;
   username = localStorage.getItem('username');
@@ -63,24 +64,26 @@ export class MenuuserComponent {
           localStorage.setItem('restaurantname', this.cart.restname);
         }
         this.cart.status = 'Added to Cart';
-
         console.log(this.cart);
-        this.newmenu.push(menuu);
-        if(this.cart.prodname){
-          localStorage.setItem('prodname',this.cart.prodname);
+        this.cartarray.push(this.cart);
+        if (this.cart.prodname) {
+          localStorage.setItem('prodname', this.cart.prodname);
         }
+        
         this.restService.toCart(this.cart).subscribe(
           (data) => {
-            alert("Added to Cart");
-            console.log(this.cart);
-          },
-          (error) => {
-            alert("Failed to add. Try again");
-          }
-        );
-    } else {
-      alert("User ID is null. Unable to add to cart.");
-    }
+              alert("Added to Cart");
+              console.log(this.cart);
+            },
+            (error) => {
+                alert("Failed to add. Try again");
+            }
+            );
+          
+        } 
+        
+   else {
+    alert("User ID is null. Unable to add to cart.");
   }
-
+  }
 }
