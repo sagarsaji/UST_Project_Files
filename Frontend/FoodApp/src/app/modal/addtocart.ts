@@ -5,7 +5,7 @@ export class Addtocart {
 	price: string | undefined;
 	prodid:number=0;
 	prodname: string | undefined;
-	quantity: number | undefined;
+	quantity: number=0;
 	restname: string | undefined;
 	status: string | undefined;
 	userid:number=0;

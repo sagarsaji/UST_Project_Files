@@ -9,9 +9,9 @@
             <div class="card-header py-3">
               <h5 class="mb-0">Cart - {{cartItem.length}} items</h5>
             </div>
-            <div class="card-body" *ngFor="let cartdet of cartItem">
+            <div class="card-body">
               <!-- Single item -->
-              <div class="row">
+              <div class="row" *ngFor="let cartdet of cartItem" else emptyCart>
                 <div class="col-lg-3 col-md-12 mb-4 mb-lg-0">
                   <!-- Image -->
                   <div class="bg-image hover-overlay hover-zoom ripple rounded" data-mdb-ripple-color="light">
@@ -50,8 +50,9 @@
                     </button>
   
                     <div class="form-outline">
-                      <input id="form1" min="0" name="quantity" value="1" type="number" class="form-control"/>
+                      <input id="form1" min="0" name="quantity" [(ngModel)]="cartdet.quantity" type="number" class="form-control" />
                     </div>
+                    
   
                     <button class="btn btn-primary px-3 ms-2"
                       onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
@@ -107,5 +108,8 @@
           </div>
         </div>
       </div>
+      <ng-template #emptyCart>
+        <p class="empty-cart-message">Your cart is empty.</p>
+      </ng-template>
     </div>
   </section>

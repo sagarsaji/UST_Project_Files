@@ -35,7 +35,7 @@ export class SignupComponent implements OnInit{
 
   ngOnInit(): void {
     if (localStorage.getItem('key') != null) {
-      this.routerService.tohome();  
+      // this.routerService.tohome();  
     }
     else {
       console.log("hi")

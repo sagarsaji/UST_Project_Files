@@ -58,7 +58,6 @@ export class RestaurantComponent {
     this.restService.getRest().subscribe(data => {
       this.rest = data;
       console.log(this.rest);
-
     });
   }
 

@@ -21,32 +21,61 @@ export class AddtocartComponent implements OnInit {
   cartItem:Addtocart[] = [];
   useridd = this.user.retrieveUserId();
   //useridd = localStorage.getItem('myuseridd');
-  
+  restnme = localStorage.getItem('restaurantname');
 
   ngOnInit(): void {
     // this.userid = this.route.snapshot.params['userid'];
     // console.log(this.userid);
     this.checkLog();
     // this.storeValuesInNewCart();
+    
   }
 
 
   storeValuesInNewCart(): void {
+    if (this.restnme && this.useridd) {
       this.cartser.getCartDetails(this.useridd).subscribe(
         (data) => {
           this.cartItem = data;
+          if (this.cartItem) {
+            const filteredMenuItems = this.cartItem.filter((item) => item.restname === this.restnme);
+            console.log(filteredMenuItems);
+            this.updateQuantityIfMenuItemExists(filteredMenuItems);
+            this.cartItem = filteredMenuItems;
+          }
         },
         (error) => {
           console.log(error);
         }
       );
+    }
   }
 
-  checkLog():void{
-    if(this.service.isAuthenticated()==false){
-      this.cartItem = [];
+  
+updateQuantityIfMenuItemExists(cart: Addtocart[]): void {
+  const pname = localStorage.getItem('prodname');
+  const existingCartItem = this.cartItem.find((item) => item.prodname === pname);
+  if (existingCartItem) {
+    if (existingCartItem.quantity) {
+      existingCartItem.quantity++; // Increment the quantity
     }
-    else{
+    // this.cartser.updateQuan(existingCartItem).subscribe(
+    //   (data) => {
+    //     console.log("Quantity updated successfully.");
+    //   },
+    //   (error) => {
+    //     console.log("Failed to update quantity.");
+    //   }
+    // );
+  }
+}
+  
+
+  checkLog(): void {
+    if (!this.service.isAuthenticated()) {
+      this.cartItem = [];
+      localStorage.removeItem('restaurantname'); // Remove restaurant name from localStorage
+    } else {
       this.storeValuesInNewCart();
     }
   }

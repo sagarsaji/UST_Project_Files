@@ -66,7 +66,12 @@ export class RestaurantService {
     return this.http.put(`http://localhost:8080/rest/menu/update/${mid}`,menu);
   }
 
-  
-  
+  getCartByRestname(restname: string):Observable<Addtocart[]>{
+    return this.http.get<Addtocart[]>(`http://localhost:8082/api/v1/cart/${restname}`);
+  }
 
+  updateQuan(cart: Addtocart){
+    return this.http.put(`http://localhost:8082/api/v1/cart/update`,cart);
+  }
+  
 }
