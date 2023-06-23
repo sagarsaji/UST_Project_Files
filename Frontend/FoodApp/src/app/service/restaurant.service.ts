@@ -35,7 +35,7 @@ export class RestaurantService {
   }
 
   toCart(cart:Addtocart){
-    return this.http.post(`http://localhost:8082/api/cart/addCart`,cart);
+    return this.http.post(`http://localhost:8082/api/v1/cart/addCart`,cart);
   }
 
   getRestById(id: number): Observable<Restaurant> {
@@ -58,8 +58,8 @@ export class RestaurantService {
     return this.http.post(`http://localhost:8080/rest/addmenu`,menu);
   }
 
-  getCartDetails(uId: number): Observable<Addtocart[]> {
-    return this.http.get<Addtocart[]>(`http://localhost:8082/api/cart/viewByuser/1`);
+  getCartDetails(username: any): Observable<Addtocart[]> {
+    return this.http.get<Addtocart[]>(`http://localhost:8082/api/v1/cart/viewByuser/${username}`);
   }
 
   updateMenu(mid:number,menu:Menu):Observable<Object>{

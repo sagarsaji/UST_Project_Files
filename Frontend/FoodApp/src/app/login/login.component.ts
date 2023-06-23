@@ -17,6 +17,7 @@ export class LoginComponent implements OnInit {
   flag: boolean = false;
   usertype!: string;
   userid!: any;
+  myid!: any;
   private isAuthenticated = false;
 
   constructor(
@@ -32,7 +33,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.isAuthenticated = !!localStorage.getItem('token');
-    this.retrieveUserId();
+    this.authservice.retrieveUserId();
   }
 
   onSubmit() {
@@ -47,7 +48,7 @@ export class LoginComponent implements OnInit {
 
         if (data != null) {
           localStorage.setItem('token', this.submitMessage);
-
+          localStorage.setItem('username',this.login.username);
           this.flag = true;
 
           this.authservice.getUserByUsername(this.login.username).subscribe(
@@ -56,7 +57,8 @@ export class LoginComponent implements OnInit {
                 this.setAuthenticated(true);
               }
               this.userid = response.id;
-              localStorage.setItem('userid', this.userid);
+              // console.log("this is my id " + this.userid)
+              localStorage.setItem('myuseridd', this.userid);
 
               this.usertype = response.type;
               if (this.usertype == 'user') {
@@ -93,8 +95,11 @@ export class LoginComponent implements OnInit {
     this.route.navigate(['/login']);
   }
 
-  retrieveUserId() {
-    this.userid = sessionStorage.getItem('userid');
-    console.log('Retrieved User ID:', this.userid);
-  }
+  idnum = localStorage.getItem('myuseridd');
+
+  // sendidtoservice(){
+  //     return this.authservice.retrieveUserId(this.idnum);
+  // }
+
+  
 }

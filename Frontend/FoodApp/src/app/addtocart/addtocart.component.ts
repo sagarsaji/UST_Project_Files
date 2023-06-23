@@ -4,6 +4,7 @@ import { Addtocart } from '../modal/addtocart';
 import { Menu } from '../modal/menu';
 import { RestaurantService } from '../service/restaurant.service';
 import { SharedmenuserviceService } from '../service/sharedmenuservice.service';
+import { AuthenticateServiceService } from '../service/authenticate-service.service';
 
 @Component({
   selector: 'app-addtocart',
@@ -13,40 +14,48 @@ import { SharedmenuserviceService } from '../service/sharedmenuservice.service';
 export class AddtocartComponent implements OnInit {
 
   constructor(private cartser: RestaurantService, private router: Router,
-    private route: ActivatedRoute, private sharedmenuu: SharedmenuserviceService) { }
+    private route: ActivatedRoute, private user: AuthenticateServiceService,
+    private service:AuthenticateServiceService) { }
 
-  cart: Addtocart[] = [];
-  userid!: number;
+  
+  cartItem:Addtocart[] = [];
+  useridd = this.user.retrieveUserId();
+  //useridd = localStorage.getItem('myuseridd');
+  
 
   ngOnInit(): void {
-    this.userid = this.route.snapshot.params['userid'];
-    console.log(this.userid);
-    this.storeValuesInNewCart();
+    // this.userid = this.route.snapshot.params['userid'];
+    // console.log(this.userid);
+    this.checkLog();
+    // this.storeValuesInNewCart();
   }
 
-  getNewMenuLength(): number {
-    return this.sharedmenuu.newmenu.length;
-  }
 
   storeValuesInNewCart(): void {
-    const newmenu = this.sharedmenuu.newmenu;
-
-    // Iterate over newmenu and create Cart objects
-    for (const menuItem of newmenu) {
-      const cartItem: Addtocart = {
-        mpic: menuItem.mpic ?? '',
-        mname: menuItem.mname ?? '',
-        mprice: menuItem.mprice ?? '',
-        restname: menuItem.restname ?? '',
-        mid: menuItem.mid ?? '',
-        quantity: 1,
-        status: "in progress",
-        userid: this.sharedmenuu.getuserid()
-      };
-
-      this.cart.push(cartItem);
-    }
-
-    console.log(this.cart);
+      this.cartser.getCartDetails(this.useridd).subscribe(
+        (data) => {
+          this.cartItem = data;
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
   }
+
+  checkLog():void{
+    if(this.service.isAuthenticated()==false){
+      this.cartItem = [];
+    }
+    else{
+      this.storeValuesInNewCart();
+    }
+  }
+
+  // quaincre(){
+  //   this.cartser.incrementQuantity()
+  // }
+  
+
+    
 }
+

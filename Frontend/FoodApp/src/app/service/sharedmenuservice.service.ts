@@ -24,8 +24,8 @@ export class SharedmenuserviceService {
   private logg!: LoginComponent;
 
 
-  getuserid(){
-    return this.logg.retrieveUserId();
-  }
+  // getuserid(){
+  //   return this.logg.retrieveUserId();
+  // }
 
 }

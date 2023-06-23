@@ -15,12 +15,15 @@ export class AuthenticateServiceService {
 
   private authenticated: boolean = false;
   private tokenStr!: string;
+  userid!: any;
 
   addUser(signup: Signup): Observable<Signup> {
     return this.httpClient.post<Signup>('http://localhost:8088/api/user/register', signup);
   }
 
-  constructor(private httpClient: HttpClient,private route:Router) {}
+  constructor(private httpClient: HttpClient,private route:Router) {
+    this.retrieveUserId();
+  }
 
  
 
@@ -36,6 +39,9 @@ export class AuthenticateServiceService {
           this.tokenStr = userData.token;
           console.log("Token string: " + this.tokenStr);
           localStorage.setItem('token', this.tokenStr);
+          const id = userData.id;
+          console.log("my id is " + id);
+          localStorage.setItem('usrid',id);
           return userData;
         }
       )
@@ -66,4 +72,11 @@ export class AuthenticateServiceService {
   setBearerToken(token: string) {
     localStorage.setItem('token', token);
   }
+
+  retrieveUserId(){
+    const id = localStorage.getItem('myuseridd');
+    console.log("my user id " + id);
+    return id;
+  }
+
 }

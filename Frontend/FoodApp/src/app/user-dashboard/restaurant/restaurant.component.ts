@@ -62,31 +62,5 @@ export class RestaurantComponent {
     });
   }
 
-  // isLogged = false;
  
-  // toggleMenu() {
-  //   if (!this.isLogged) {
-  //     this.router.navigate(['/login']);
-  //   } else {
-  //     this.isLogged = true;
-  //     this.fetchSpecificRestaurantMenu(this.restname);
-  //   }
-  // }
-  
-  
-  
-
-  // search():void{
-  //   if(this.searchQuery){
-  //     this.filteredData=this.restData.filter(
-  //       (fd:any)=>
-  //       fd.restname.toLowerCase().include(this.searchQuery.toLowerCase)
-  //     );
-  //   }
-  //   else{
-  //     this.filteredData=[...this.restData];
-  //   }
-  // }
-
-
 }

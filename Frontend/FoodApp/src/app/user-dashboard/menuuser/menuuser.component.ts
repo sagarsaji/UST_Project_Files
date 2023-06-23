@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { LoginComponent } from 'src/app/login/login.component';
 import { Addtocart } from 'src/app/modal/addtocart';
 import { Menu } from 'src/app/modal/menu';
+import { AuthenticateServiceService } from 'src/app/service/authenticate-service.service';
 import { RestaurantService } from 'src/app/service/restaurant.service';
 import { SharedmenuserviceService } from 'src/app/service/sharedmenuservice.service';
 
@@ -16,17 +17,19 @@ export class MenuuserComponent {
   quantity: number = 0;
 
   menu: Menu[] = [];
-  newmenu: Menu[] = [];
   cartarray!: any;
   restaurant!: String;
   restn: any;
   restname: any;
-  userid!: number;
-  cart:Addtocart[] = [];
+  cart!: Addtocart;
+ 
+  useridnum = localStorage.getItem('myuseridd');
+  username = localStorage.getItem('username');
 
   constructor(private restService:RestaurantService,
     private router: Router,private route:ActivatedRoute,
-    private sharedMenu:SharedmenuserviceService){}
+    private sharedMenu:SharedmenuserviceService,
+    private user:AuthenticateServiceService){}
 
   ngOnInit(): void {
     this.restn=this.route.snapshot.params['restname'];
@@ -34,7 +37,7 @@ export class MenuuserComponent {
     this.fetchSpecificRestaurantMenu(this.restname);
   }
 
-  // logg!: LoginComponent;
+  
 
   fetchSpecificRestaurantMenu(restname: string) {
     this.restService.getAllMenu().subscribe(data => {
@@ -43,9 +46,12 @@ export class MenuuserComponent {
     });
   }
 
+  newmenu: Menu[] = [];
+  useridd = this.user.retrieveUserId();
+  
+
   pushtomenu(menuItem: Menu) {
-    this.sharedMenu.addToMenu(menuItem);
-    console.log(this.newmenu);
+    this.newmenu.push(menuItem);
   }
 
   getMenuItems(): Menu[] {
@@ -55,6 +61,42 @@ export class MenuuserComponent {
   clearMenu() {
     this.sharedMenu.clearMenu()
   }
+
+  // mymenu:Menu[] = this.getMenuItems();
+
+  addtocart(menuu: Menu) {
+    console.log(this.useridd);
+    
+    if (this.useridd !== null) {
+      this.cart = new Addtocart();
+      this.cart.userid = parseInt(this.useridd);
+      this.cart.prodid = menuu.mid;
+
+      this.cart.prodname = menuu.mname;
+      console.log("test" + this.cart.prodname);
+      this.cart.mpic = menuu.mpic;
+      this.cart.price = menuu.mprice;
+      this.cart.quantity = 1;
+      this.cart.restname = menuu.restname;
+      this.cart.status = 'Added to Cart';
+
+      console.log(this.cart);
+  
+      this.restService.toCart(this.cart).subscribe(
+        (data) => {
+          alert("Added to Cart");
+          console.log(this.cart);
+        },
+        (error) => {
+          alert("Failed to add. Try again");
+        }
+      );
+    } else {
+      alert("User ID is null. Unable to add to cart.");
+    }
+  }
+  
+  
   
 
 
@@ -67,5 +109,5 @@ export class MenuuserComponent {
   //     //this.router.navigate(['addtocart',this.userid]);
   //   })
   // }
-
+  // console.log(this.cart);
 }

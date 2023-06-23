@@ -25,7 +25,6 @@ const routes: Routes = [
   {path:'',component:UserDashboardComponent},
   {path:'login', component: LoginComponent},
   {path:'signup', component: SignupComponent},
-  {path:'admin', component: AdminDashboardComponent},
   {path:'user', component: UserpageComponent},
   {path:'kitchen', component: KitchenstaffDashboardComponent},
   {path:'create',component:CreateComponent},
