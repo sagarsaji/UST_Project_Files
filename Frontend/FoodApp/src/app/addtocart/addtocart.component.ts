@@ -40,7 +40,6 @@ export class AddtocartComponent implements OnInit {
           if (this.cartItem) {
             const filteredMenuItems = this.cartItem.filter((item) => item.restname === this.restnme);
             console.log(filteredMenuItems);
-            this.updateQuantityIfMenuItemExists(filteredMenuItems);
             this.cartItem = filteredMenuItems;
           }
         },
@@ -52,23 +51,7 @@ export class AddtocartComponent implements OnInit {
   }
 
   
-updateQuantityIfMenuItemExists(cart: Addtocart[]): void {
-  const pname = localStorage.getItem('prodname');
-  const existingCartItem = this.cartItem.find((item) => item.prodname === pname);
-  if (existingCartItem) {
-    if (existingCartItem.quantity) {
-      existingCartItem.quantity++; // Increment the quantity
-    }
-    // this.cartser.updateQuan(existingCartItem).subscribe(
-    //   (data) => {
-    //     console.log("Quantity updated successfully.");
-    //   },
-    //   (error) => {
-    //     console.log("Failed to update quantity.");
-    //   }
-    // );
-  }
-}
+
   
 
   checkLog(): void {

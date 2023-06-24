@@ -5,6 +5,6 @@ export class Menu {
 	  mprice:string | undefined;
     mpic: string | undefined;
     restname: string | undefined;
-    quantity:number=1;
+    quantity:number=0;
 
 }

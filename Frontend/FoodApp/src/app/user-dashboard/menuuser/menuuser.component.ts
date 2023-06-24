@@ -64,8 +64,8 @@ export class MenuuserComponent {
           localStorage.setItem('restaurantname', this.cart.restname);
         }
         this.cart.status = 'Added to Cart';
+
         console.log(this.cart);
-        this.cartarray.push(this.cart);
         if (this.cart.prodname) {
           localStorage.setItem('prodname', this.cart.prodname);
         }
@@ -79,7 +79,6 @@ export class MenuuserComponent {
                 alert("Failed to add. Try again");
             }
             );
-          
         } 
         
    else {
