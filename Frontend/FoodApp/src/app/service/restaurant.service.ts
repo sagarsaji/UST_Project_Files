@@ -70,8 +70,9 @@ export class RestaurantService {
     return this.http.get<Addtocart[]>(`http://localhost:8082/api/v1/cart/${restname}`);
   }
 
-  updateQuan(cart: Addtocart){
-    return this.http.put(`http://localhost:8082/api/v1/cart/update`,cart);
+  updateIncrement(cartid: number): Observable<Object> {
+    return this.http.put(`http://localhost:8082/api/v1/cart/incrementUpdateQuantity/${cartid}`, {});
   }
+  
   
 }

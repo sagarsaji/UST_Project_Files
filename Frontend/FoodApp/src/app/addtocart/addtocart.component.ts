@@ -67,6 +67,9 @@ export class AddtocartComponent implements OnInit {
   //   this.cartser.incrementQuantity()
   // }
   
+  increment(cartid: number){
+    
+  }
 
     
 }
