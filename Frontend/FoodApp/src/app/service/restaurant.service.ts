@@ -73,6 +73,9 @@ export class RestaurantService {
   updateIncrement(cartid: number): Observable<Object> {
     return this.http.put(`http://localhost:8082/api/v1/cart/incrementUpdateQuantity/${cartid}`, {});
   }
-  
+
+  updateDecrement(cartid : number): Observable<Object> {
+    return this.http.put(`http://localhost:8082/api/v1/cart/decrementUpdateQuantity/${cartid}`,{});
+  }
   
 }

@@ -68,7 +68,19 @@ export class AddtocartComponent implements OnInit {
   // }
   
   increment(cartid: number){
-    
+    this.cartser.updateIncrement(cartid).subscribe(
+      (data) => {
+        console.log(data);
+      }
+    )
+  }
+
+  decrement(cartid: number){
+    this.cartser.updateDecrement(cartid).subscribe(
+      (data) => {
+        console.log(data);
+      }
+    )
   }
 
     
