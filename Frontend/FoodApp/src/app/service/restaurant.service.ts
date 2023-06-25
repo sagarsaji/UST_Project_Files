@@ -14,24 +14,24 @@ export class RestaurantService {
   constructor(private http: HttpClient) { }
 
   saveProduct(rest:Restaurant):Observable<Object>{
-    return this.http.post(`http://localhost:8080/rest/create`,rest);
+    return this.http.post(`http://localhost:8085/api/v1/restaurant/create`,rest);
   }
   getRest(){
-    return this.http.get<Restaurant[]>(`http://localhost:8080/rest/all`);
+    return this.http.get<Restaurant[]>(`http://localhost:8085/api/v1/restaurant/all`);
   }
   getMenuByName(restname: String):Observable<Menu[]>{
-    return this.http.get<Menu[]>(`http://localhost:8080/rest/menu/find/${restname}`);
+    return this.http.get<Menu[]>(`http://localhost:8084/api/v1/menu/find/${restname}`);
   }
   deleteRest(id: number):Observable<Restaurant>{
-    return this.http.delete<Restaurant>(`http://localhost:8080/rest/delete/${id}`);
+    return this.http.delete<Restaurant>(`http://localhost:8085/api/v1/restaurant/delete/${id}`);
   }
 
   deleteMenu(mid: number):Observable<Menu>{
-    return this.http.delete<Menu>(`http://localhost:8080/rest/delete/menu/${mid}`);
+    return this.http.delete<Menu>(`http://localhost:8084/api/v1/menu/delete/menu/${mid}`);
   }
 
   getAllMenu(){
-    return this.http.get<Menu[]>(`http://localhost:8080/rest/getAllMenu`);
+    return this.http.get<Menu[]>(`http://localhost:8084/api/v1/menu/getAllMenu`);
   }
 
   toCart(cart:Addtocart){
@@ -39,23 +39,23 @@ export class RestaurantService {
   }
 
   getRestById(id: number): Observable<Restaurant> {
-    return this.http.get<Restaurant>(`http://localhost:8080/rest/getbyid/${id}`);
+    return this.http.get<Restaurant>(`http://localhost:8085/api/v1/restaurant/getbyid/${id}`);
   }
 
   getMenuById(mid:number):Observable<Menu>{
-    return this.http.get<Menu>(`http://localhost:8080/rest/getbyid/menu/${mid}`);
+    return this.http.get<Menu>(`http://localhost:8084/api/v1/menu/getbyid/menu/${mid}`);
   }
 
   saveUpdate(rest:Restaurant):Observable<Object>{
-    return this.http.post(`http://localhost:8080/rest/create`,rest);
+    return this.http.post(`http://localhost:8085/api/v1/restaurant/create`,rest);
   }
 
   updateProduct(id:number,rest: Restaurant): Observable<Object> {
-    return this.http.put(`http://localhost:8080/rest/update/${id}`,rest);
+    return this.http.put(`http://localhost:8085/api/v1/restaurant/update/${id}`,rest);
   }
 
   saveMenu(menu: Menu):Observable<Object>{
-    return this.http.post(`http://localhost:8080/rest/addmenu`,menu);
+    return this.http.post(`http://localhost:8084/api/v1/menu/addmenu`,menu);
   }
 
   getCartDetails(username: any): Observable<Addtocart[]> {
@@ -63,7 +63,7 @@ export class RestaurantService {
   }
 
   updateMenu(mid:number,menu:Menu):Observable<Object>{
-    return this.http.put(`http://localhost:8080/rest/menu/update/${mid}`,menu);
+    return this.http.put(`http://localhost:8084/api/v1/menu/update/${mid}`,menu);
   }
 
   getCartByRestname(restname: string):Observable<Addtocart[]>{

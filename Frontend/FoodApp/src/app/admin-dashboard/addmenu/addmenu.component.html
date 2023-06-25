@@ -4,7 +4,7 @@
       
       <div class="form-group">
         <label for="name">Item Name</label>
-        <input type="text" class="form-control" [(ngModel)]="menudet.mname" id="name" formControlName="itemName" required pattern="[a-zA-Z]*">
+        <input type="text" class="form-control" [(ngModel)]="menudet.mname" id="name" formControlName="itemName" required pattern="[a-zA-Z ]*">
         <div class="valid-feedback">Looks good!</div>
         <div class="invalid-feedback">Please enter a valid item name.</div>
       </div>

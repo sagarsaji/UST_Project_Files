@@ -57,8 +57,8 @@ export class MenuuserComponent {
         this.cart.prodid = menuu.mid;
         this.cart.prodname = menuu.mname;
         this.cart.mpic = menuu.mpic;
-        this.cart.price = menuu.mprice;
         this.cart.quantity = menuu.quantity;
+        this.cart.price = menuu.mprice;
         this.cart.restname = menuu.restname;
         if (this.cart.restname) {
           localStorage.setItem('restaurantname', this.cart.restname);

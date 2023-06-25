@@ -32,6 +32,7 @@ export class AddtocartComponent implements OnInit {
   }
 
 
+
   storeValuesInNewCart(): void {
     if (this.restnme && this.useridd) {
       this.cartser.getCartDetails(this.useridd).subscribe(
@@ -50,14 +51,24 @@ export class AddtocartComponent implements OnInit {
     }
   }
 
+  // calculateTotal() {
+  //   let total = 0;
+  //   for (let cartItem of this.cartItem) {
+  //     if (cartItem.price !== undefined && cartItem.quantity !== undefined) {
+  //       let price = parseInt(cartItem.price);
+  //       total += cartItem.quantity * price;
+  //     }
+  //   }
+  //   return total;
+  // }
+  
   
 
   
 
   checkLog(): void {
     if (!this.service.isAuthenticated()) {
-      this.cartItem = [];
-      localStorage.removeItem('restaurantname'); // Remove restaurant name from localStorage
+      this.router.navigate(['/user']);
     } else {
       this.storeValuesInNewCart();
     }
@@ -74,6 +85,7 @@ export class AddtocartComponent implements OnInit {
       }
     )
   }
+
 
   decrement(cartid: number){
     this.cartser.updateDecrement(cartid).subscribe(

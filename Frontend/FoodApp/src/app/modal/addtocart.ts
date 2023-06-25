@@ -2,7 +2,7 @@ export class Addtocart {
 
     
 	mpic: string | undefined;
-	price: string | undefined;
+	price:number=0;
 	prodid:number=0;
 	prodname: string | undefined;
 	quantity: number=0;
