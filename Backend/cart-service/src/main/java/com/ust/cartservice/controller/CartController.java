@@ -76,4 +76,9 @@ public class CartController {
         return ResponseEntity.ok(cartServ.dupdateQuantity(cartid));
     }
 
+    @GetMapping("/gettotal/{cartid}")
+    public ResponseEntity<Long> getTotal(@PathVariable Long cartid){
+        return ResponseEntity.ok(cartServ.getTotalAmount(cartid));
+    }
+
 }

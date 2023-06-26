@@ -10,6 +10,7 @@ export class Addtocart {
 	status: string | undefined;
 	userid:number=0;
 	cartid:any;
+	total:number=0;
 
   
 }

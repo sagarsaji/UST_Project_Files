@@ -74,7 +74,7 @@ public class UserService {
     public User registerNewKitchenStaff(UserRegistrationRequest userRegistrationRequest) {
         User user = new User();
         user.setUserName(userRegistrationRequest.getUserName());
-        user.setUserFirstName(userRegistrationRequest.getUserFirstName());
+        user.setUserFirstName(userRegistrationRequest.getUserFirstName());//restaurantper
         user.setUserLastName("Restuarent");
         user.setUserPassword(getEncodedPassword(userRegistrationRequest.getUserPassword()));
         user.setUserAddress("Not Applicable");

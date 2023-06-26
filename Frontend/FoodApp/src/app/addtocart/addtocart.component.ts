@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Addtocart } from '../modal/addtocart';
 import { Menu } from '../modal/menu';
@@ -11,7 +11,7 @@ import { AuthenticateServiceService } from '../service/authenticate-service.serv
   templateUrl: './addtocart.component.html',
   styleUrls: ['./addtocart.component.css']
 })
-export class AddtocartComponent implements OnInit {
+export class AddtocartComponent implements OnInit,OnChanges {
 
   constructor(private cartser: RestaurantService, private router: Router,
     private route: ActivatedRoute, private user: AuthenticateServiceService,
@@ -29,6 +29,10 @@ export class AddtocartComponent implements OnInit {
     this.checkLog();
     // this.storeValuesInNewCart();
     
+  }
+
+  ngOnChanges(){
+    this.storeValuesInNewCart();
   }
 
 
@@ -51,16 +55,16 @@ export class AddtocartComponent implements OnInit {
     }
   }
 
-  // calculateTotal() {
-  //   let total = 0;
-  //   for (let cartItem of this.cartItem) {
-  //     if (cartItem.price !== undefined && cartItem.quantity !== undefined) {
-  //       let price = parseInt(cartItem.price);
-  //       total += cartItem.quantity * price;
-  //     }
-  //   }
-  //   return total;
-  // }
+  calculateTotal() {
+    let total = 0;
+    for (let cartItem of this.cartItem) {
+      if (cartItem.price !== undefined && cartItem.quantity !== undefined) {
+        //let price = parseInt(cartItem.price);
+        total += cartItem.total;
+      }
+    }
+    return total;
+  }
   
   
 
@@ -74,9 +78,7 @@ export class AddtocartComponent implements OnInit {
     }
   }
 
-  // quaincre(){
-  //   this.cartser.incrementQuantity()
-  // }
+  
   
   increment(cartid: number){
     this.cartser.updateIncrement(cartid).subscribe(
@@ -86,6 +88,8 @@ export class AddtocartComponent implements OnInit {
     )
   }
 
+ 
+
 
   decrement(cartid: number){
     this.cartser.updateDecrement(cartid).subscribe(
@@ -93,6 +97,16 @@ export class AddtocartComponent implements OnInit {
         console.log(data);
       }
     )
+  }
+
+  gettotal(cartid: number){
+    let total=0;
+    this.cartser.getTotal(cartid).subscribe(
+      (data: number) => {
+        total = data;
+      }
+    )
+    return total;
   }
 
     

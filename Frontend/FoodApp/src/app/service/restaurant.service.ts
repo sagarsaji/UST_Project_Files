@@ -34,7 +34,7 @@ export class RestaurantService {
     return this.http.get<Menu[]>(`http://localhost:8084/api/v1/menu/getAllMenu`);
   }
 
-  toCart(cart:Addtocart){
+  toCart(cart:Addtocart):Observable<Object>{
     return this.http.post(`http://localhost:8082/api/v1/cart/addCart`,cart);
   }
 
@@ -76,6 +76,10 @@ export class RestaurantService {
 
   updateDecrement(cartid : number): Observable<Object> {
     return this.http.put(`http://localhost:8082/api/v1/cart/decrementUpdateQuantity/${cartid}`,{});
+  }
+
+  getTotal(cartid: number): Observable<number> {
+    return this.http.get<number>(`http://localhost:8082/api/v1/cart/gettotal/${cartid}`);
   }
   
 }

@@ -30,6 +30,9 @@ public class Cart {
     @Column(name = "mpic")
     private String mpic;
 
+    @Column(name = "total")
+    private Long total;
+
     public Cart() {
 
     }
@@ -106,7 +109,15 @@ public class Cart {
         this.mpic = mpic;
     }
 
-    public Cart(Long cartid, int userid, String restname, Long prodid, String prodname, Long price, String status, Long quantity, String mpic) {
+    public Long getTotal() {
+        return total;
+    }
+
+    public void setTotal(Long total) {
+        this.total = total;
+    }
+
+    public Cart(Long cartid, int userid, String restname, Long prodid, String prodname, Long price, String status, Long quantity, String mpic, Long total) {
         this.cartid = cartid;
         this.userid = userid;
         this.restname = restname;
@@ -116,6 +127,6 @@ public class Cart {
         this.status = status;
         this.quantity = quantity;
         this.mpic = mpic;
+        this.total = total;
     }
-
 }

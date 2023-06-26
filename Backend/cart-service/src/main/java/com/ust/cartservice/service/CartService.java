@@ -61,12 +61,12 @@ public class CartService {
         if (opt.isPresent()) {
             exist = opt.get();
             exist.setQuantity(exist.getQuantity() + 1);
-            Long total = exist.getQuantity() * exist.getPrice();
-            exist.setPrice(total);
+            exist.setTotal(exist.getQuantity() * c.getPrice());
             return cartRepo.save(exist);
         } else {
             c.setStatus("In progress");
             c.setQuantity(1L);
+            c.setTotal(c.getQuantity() * c.getPrice());
             Cart saveCart = cartRepo.save(c);
             System.out.println("added");
             return saveCart;
@@ -116,8 +116,7 @@ public class CartService {
         Cart c = cartRepo.findById(cartid).orElse(null);
         if(c!=null){
             c.setQuantity(c.getQuantity() + 1);
-            Long total = c.getQuantity() * c.getPrice();
-            c.setPrice(total);
+            c.setTotal(c.getQuantity() * c.getPrice());
         }
         cartRepo.save(c);
         return c;
@@ -134,8 +133,7 @@ public class CartService {
         if(c!=null){
             if(c.getQuantity()>0) {
                 c.setQuantity(c.getQuantity() - 1);
-                Long total = c.getQuantity() * c.getPrice();
-                c.setPrice(total);
+                c.setTotal(c.getQuantity() * c.getPrice());
             }
         }
         cartRepo.save(c);
@@ -157,5 +155,12 @@ public class CartService {
     }
 
 
-
+    public Long getTotalAmount(Long cartid) {
+        Cart c = null;
+        Optional<Cart> opt = cartRepo.findById(cartid);
+        if(opt.isPresent()){
+            c = opt.get();
+        }
+        return c.getTotal();
+    }
 }

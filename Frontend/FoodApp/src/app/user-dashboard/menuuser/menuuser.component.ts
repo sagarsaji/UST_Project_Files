@@ -45,7 +45,7 @@ export class MenuuserComponent {
   }
 
   newmenu: Menu[] = [];
-  
+  cartidnum!:any;
   
 
   addtocart(menuu: Menu) {
@@ -74,6 +74,7 @@ export class MenuuserComponent {
           (data) => {
               alert("Added to Cart");
               console.log(this.cart);
+              // this.cartidnum = data.;
             },
             (error) => {
                 alert("Failed to add. Try again");

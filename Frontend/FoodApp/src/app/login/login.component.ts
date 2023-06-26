@@ -53,11 +53,11 @@ export class LoginComponent implements OnInit {
 
           this.authservice.getUserByUsername(this.login.username).subscribe(
             (response: any) => {
+              console.log(response.token);
               if (response.token) {
                 this.setAuthenticated(true);
               }
               this.userid = response.id;
-              // console.log("this is my id " + this.userid)
               localStorage.setItem('myuseridd', this.userid);
 
               this.usertype = response.type;
