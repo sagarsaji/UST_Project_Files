@@ -15,8 +15,6 @@ public class UserRegistrationRequest {
 
 
     @NotEmpty(message = "Username is required")
-    @Email(message = "Invalid email address")
-    @Pattern(regexp = ".*@gmail\\.com$", message = "Email must be of format @gmail.com")
     private String userName;
 
     @NotEmpty(message = "First name is required")

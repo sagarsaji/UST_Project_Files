@@ -44,11 +44,11 @@ export class AddkitchenstaffComponent implements OnInit{
     }
 
     saveStaff() {
-      this.signup.restname = this.addKitchenGroup.get('restaurant')?.value;
-      this.signup.username = this.addKitchenGroup.get('ksusername')?.value;
-      this.signup.password = this.addKitchenGroup.get('kspassword')?.value;
+      this.signup.userFirstName = this.addKitchenGroup.get('restaurant')?.value;
+      this.signup.userName = this.addKitchenGroup.get('ksusername')?.value;
+      this.signup.userPassword = this.addKitchenGroup.get('kspassword')?.value;
 
-      this.authser.addUser(this.signup).subscribe(
+      this.authser.addKitchen(this.signup).subscribe(
         (data) => {
           console.log(data);
           this.router.navigate(['/product']);

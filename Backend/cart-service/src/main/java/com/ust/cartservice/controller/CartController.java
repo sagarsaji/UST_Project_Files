@@ -28,9 +28,9 @@ public class CartController {
     }
 
     //retrieve item by userid
-    @GetMapping("/viewByuser/{uId}")
-    public ResponseEntity<?> getDetailsByUserId(@PathVariable int uId){
-        List<Cart> cList = cartServ.getByUserId(uId);
+    @GetMapping("/viewByuser/{userid}")
+    public ResponseEntity<?> getDetailsByUserId(@PathVariable Long userid){
+        List<Cart> cList = cartServ.getByUserId(userid);
         if(cList != null)
             return new ResponseEntity<List<Cart>>(cList, HttpStatus.OK);
         else
@@ -57,8 +57,8 @@ public class CartController {
     }
 
     @DeleteMapping("/del/{cartId}/{userId}")
-    public ResponseEntity<String> deleteCart(@PathVariable Long cartId, @PathVariable Long userId) {
-        cartServ.deleteCartByCartIdAndUserId(cartId, userId);
+    public ResponseEntity<String> deleteCart(@PathVariable Long cartid, @PathVariable Long userid) {
+        cartServ.deleteCartByCartIdAndUserId(cartid, userid);
         return ResponseEntity.ok("Cart deleted successfully.");
     }
 

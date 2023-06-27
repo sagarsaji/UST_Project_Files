@@ -11,49 +11,49 @@ import { Router } from '@angular/router';
 })
 export class AuthenticateServiceService {
 
-  
-
   private authenticated: boolean = false;
   private tokenStr!: string;
   userid!: any;
 
+  constructor(private httpClient: HttpClient, private route: Router) {
+    this.checkAuthentication();
+  }
+
   addUser(signup: Signup): Observable<Signup> {
-    return this.httpClient.post<Signup>('http://localhost:8088/api/user/register', signup);
+    return this.httpClient.post<Signup>('http://localhost:8088/api/auth/registerNewUser', signup);
   }
 
-  constructor(private httpClient: HttpClient,private route:Router) {
-    this.retrieveUserId();
+  addKitchen(signup: Signup): Observable<Signup> {
+    return this.httpClient.post<Signup>(`http://localhost:8088/api/auth/registerNewKitchenStaff`, signup);
   }
-
- 
 
   getusers(userr: Login) {
     console.log("GET USER");
-    console.log(userr.username);
-    console.log(userr.password);
+    console.log(userr.userName);
+    console.log(userr.userPassword);
     this.authenticated = true;
-    return this.httpClient.post<any>(`http://localhost:8088/api/users/login`, userr, { headers: new HttpHeaders().set('responseType', 'text') }).pipe(
+    return this.httpClient.post<any>(`http://localhost:8088/api/auth/authenticate`, userr, { headers: new HttpHeaders().set('responseType', 'text') }).pipe(
       map(
         userData => {
-          localStorage.setItem('username', userr.username);
+          localStorage.setItem('username', userr.userName);
           this.tokenStr = userData.token;
           console.log("Token string: " + this.tokenStr);
           localStorage.setItem('token', this.tokenStr);
-          const id = userData.id;
+          const id = userData.userid;
           console.log("my id is " + id);
-          localStorage.setItem('usrid',id);
+          localStorage.setItem('myuseridd', id);
+          this.userid = id;
           return userData;
         }
       )
     );
   }
 
-  getUserByUsername(username:string){
+  getUserByUsername(username: string) {
     return this.httpClient.get<any>(`http://localhost:8088/api/user/details/${username}`);
   }
 
-
-  isAuthenticated():boolean{
+  isAuthenticated(): boolean {
     return this.authenticated;
   }
 
@@ -63,9 +63,8 @@ export class AuthenticateServiceService {
 
   logout() {
     this.authenticated = false;
-    //this.tokenStr = '';
-    //localStorage.removeItem('tokenStr');
     localStorage.removeItem('token');
+    localStorage.removeItem('myuseridd');
     this.route.navigate(['/user']);
   }
 
@@ -73,10 +72,14 @@ export class AuthenticateServiceService {
     localStorage.setItem('token', token);
   }
 
-  retrieveUserId(){
-    const id = localStorage.getItem('myuseridd');
-    console.log("my user id " + id);
-    return id;
+  private checkAuthentication() {
+    const token = localStorage.getItem('token');
+    const userId = localStorage.getItem('myuseridd');
+    this.authenticated = !!token && !!userId;
+    this.userid = userId;
   }
 
+  retrieveUserId() {
+    return this.userid;
+  }
 }

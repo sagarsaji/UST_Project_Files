@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { UserAuthService } from 'src/app/authservice/user-auth.service';
 import { Login } from 'src/app/modal/login';
 import { AuthenticateServiceService } from 'src/app/service/authenticate-service.service';
 import { RouterServiceService } from 'src/app/service/router-service.service';
@@ -19,7 +20,8 @@ export class AdminloginComponent {
   usertype!: string;
 
   constructor(private routerService: RouterServiceService, 
-    private authservice: AuthenticateServiceService,private route:Router) {
+    private authservice: AuthenticateServiceService,private route:Router,
+    private userAuthService: UserAuthService) {
 
     this.adminForm = new FormGroup({
       username: new FormControl(),
@@ -30,8 +32,8 @@ export class AdminloginComponent {
   onSubmit(){
 
     console.log("hi from loginsubmit");
-    this.login.username = this.adminForm.value.username;
-    this.login.password = this.adminForm.value.password;
+    this.login.userName = this.adminForm.value.username;
+    this.login.userPassword = this.adminForm.value.password;
 
     this.submitMessage = this.adminForm.value.username;
 
@@ -46,15 +48,16 @@ export class AdminloginComponent {
         localStorage.setItem("key", this.submitMessage);
         this.flag = true;
         
-        if(this.login.username == 'admin' && this.login.password == 'admin'){
-          this.usertype = 'admin';
-        }
-        if(this.usertype == 'admin'){
-          this.route.navigate(['/menu']);
-        }
-        else{
-          alert("You are not authorized to Login");
-        }
+        this.userAuthService.setRoles(data.user.role);
+        this.userAuthService.setToken(data.jwtToken);
+
+          const role = data.user.role[0].roleName;
+          if(role==='Admin'){
+            this.route.navigate(['/product']);
+          }
+          else{
+            alert('You are not authorized to Login');
+          }
         
       }
     },

@@ -53,7 +53,7 @@ export class MenuuserComponent {
     
     if (this.useridd !== null) {
         this.cart = new Addtocart();
-        this.cart.userid = parseInt(this.useridd);
+        this.cart.userid = Number(this.useridd);
         this.cart.prodid = menuu.mid;
         this.cart.prodname = menuu.mname;
         this.cart.mpic = menuu.mpic;
@@ -74,7 +74,6 @@ export class MenuuserComponent {
           (data) => {
               alert("Added to Cart");
               console.log(this.cart);
-              // this.cartidnum = data.;
             },
             (error) => {
                 alert("Failed to add. Try again");

@@ -5,6 +5,7 @@ import com.cravio.authenticationservice.dto.UserRegistrationRequest;
 import com.cravio.authenticationservice.model.User;
 import com.cravio.authenticationservice.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,11 +25,11 @@ public class UserController {
     }
 
     @PostMapping({"/registerNewUser"})
-    public User registerNewUser(@RequestBody @Valid UserRegistrationRequest userRegistrationRequest) {
+    public ResponseEntity<User> registerNewUser(@RequestBody @Valid UserRegistrationRequest userRegistrationRequest) {
         return userService.registerNewUser(userRegistrationRequest);
     }
     @PostMapping({"/registerNewKitchenStaff"})
-    public User registerNewKitchenStaff(@RequestBody @Valid UserRegistrationRequest userRegistrationRequest) {
+    public ResponseEntity<User> registerNewKitchenStaff(@RequestBody @Valid UserRegistrationRequest userRegistrationRequest) {
         return userService.registerNewKitchenStaff(userRegistrationRequest);
     }
 

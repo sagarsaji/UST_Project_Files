@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Login } from '../modal/login';
 import { AuthenticateServiceService } from '../service/authenticate-service.service';
 import { RouterServiceService } from '../service/router-service.service';
+import { UserAuthService } from '../authservice/user-auth.service';
 
 @Component({
   selector: 'app-login',
@@ -23,7 +24,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private routerService: RouterServiceService,
     private authservice: AuthenticateServiceService,
-    private route: Router
+    private route: Router,
+    private userAuthService:UserAuthService
   ) {
     this.loginForm = new FormGroup({
       username: new FormControl(),
@@ -37,41 +39,32 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    this.login.username = this.loginForm.value.username;
-    this.login.password = this.loginForm.value.password;
+    this.login.userName = this.loginForm.value.username;
+    this.login.userPassword = this.loginForm.value.password;
 
     this.submitMessage = this.loginForm.value.username;
 
     this.authservice.getusers(this.login).subscribe(
-      (data) => {
+      (data: any) => {
         this.authservice.setBearerToken(data['token']);
-
         if (data != null) {
           localStorage.setItem('token', this.submitMessage);
-          localStorage.setItem('username',this.login.username);
+          localStorage.setItem('username',this.login.userName);
           this.flag = true;
+          this.setAuthenticated(true);
+          this.userid = data.user.userid;
+          localStorage.setItem('myuseridd', this.userid);
 
-          this.authservice.getUserByUsername(this.login.username).subscribe(
-            (response: any) => {
-              console.log(response.token);
-              if (response.token) {
-                this.setAuthenticated(true);
-              }
-              this.userid = response.id;
-              localStorage.setItem('myuseridd', this.userid);
+          this.userAuthService.setRoles(data.user.role);
+          this.userAuthService.setToken(data.jwtToken);
 
-              this.usertype = response.type;
-              if (this.usertype == 'user') {
-                this.route.navigate(['/user']);
-              } else {
-                alert('You are not authorized to login.');
-              }
-            },
-            (error) => {
-              console.log('error');
-              alert('You have entered incorrect details.');
-            }
-          );
+          const role = data.user.role[0].roleName;
+          if(role==='User'){
+            this.route.navigate(['/user']);
+          }
+          else{
+            alert('You are not authorized to Login');
+          }
         }
       },
       (error) => {

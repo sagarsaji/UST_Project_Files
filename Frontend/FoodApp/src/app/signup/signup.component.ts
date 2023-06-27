@@ -22,14 +22,11 @@ export class SignupComponent implements OnInit{
 
   constructor(private routerService: RouterServiceService, private authenticateService: AuthenticateServiceService, public formBuilder: FormBuilder) {
     this.signupForm = new FormGroup({
-      username: new FormControl(),
-      password: new FormControl(),
-      conpassword: new FormControl(),
-      name: new FormControl(),
-      email: new FormControl(),
-      address: new FormControl(),
-      phone: new FormControl(),
-      type: new FormControl()
+      userName: new FormControl(),
+      userFirstName: new FormControl(),
+      userLastName: new FormControl(),
+      userPassword: new FormControl(),
+      userAddress: new FormControl()
     });
   }
 
@@ -40,17 +37,11 @@ export class SignupComponent implements OnInit{
     else {
       console.log("hi")
       this.signupForm = new FormGroup({
-
-        type: new FormControl(),
-        name: new FormControl('', Validators.required),
-        username: new FormControl('', Validators.required),
-        password: new FormControl('', Validators.required),
-        conpassword: new FormControl('', Validators.required),
-        email: new FormControl('',  Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")),
-        address: new FormControl('', Validators.required),
-        phone: new FormControl('', [ Validators.required,
-          Validators.pattern("^[0-9]*$"),
-          Validators.minLength(10), Validators.maxLength(10)])
+        userName: new FormControl('', Validators.required),
+        userFirstName: new FormControl('', Validators.required),
+        userLastName: new FormControl('', Validators.required),
+        userPassword: new FormControl('', Validators.required),
+        userAddress: new FormControl('', Validators.required),
       });
     }
   }
@@ -63,29 +54,23 @@ export class SignupComponent implements OnInit{
   onSubmit(){
     console.log("Hi");
 
-    this.signup.password = this.signupForm.value.password;
-    console.log("password== " + this.signupForm.value.password)
-    this.signup.username = this.signupForm.value.username;
-    console.log("username== " + this.signupForm.value.username)
-    this.signup.name = this.signupForm.value.name;
-    console.log("name== " + this.signupForm.value.name)
-    this.signup.email = this.signupForm.value.email;
-    console.log("email== " + this.signupForm.value.email)
-    this.signup.address = this.signupForm.value.address;
-    console.log("address== " + this.signupForm.value.address)
-    this.signup.phone = this.signupForm.value.phone;
-    console.log("phone== " + this.signupForm.value.phone)
-    this.signup.conpassword = this.signupForm.value.conpassword;
-    console.log("conpassword== " + this.signupForm.value.conpassword)
-    this.signup.type = this.signupForm.value.type;
-    console.log("password== " + this.signupForm.value.type)
+    this.signup.userPassword = this.signupForm.value.userPassword;
+    console.log("password== " + this.signupForm.value.userPassword)
+    this.signup.userName = this.signupForm.value.userName;
+    console.log("username== " + this.signupForm.value.userName)
+    this.signup.userFirstName = this.signupForm.value.userFirstName;
+    console.log("name== " + this.signupForm.value.userFirstName)
+    this.signup.userAddress = this.signupForm.value.userAddress;
+    console.log("address== " + this.signupForm.value.userAddress)
+    this.signup.userLastName = this.signupForm.value.userLastName;
+    console.log("Lastname== " + this.signupForm.value.userLastName)
 
     this.signUpArray.push(this.signup);
     this.authenticateService.addUser(this.signup).subscribe((data) => {
       // console.log("inside regsiter angular")
       console.log(data)
       this.routerService.tologin();
-      alert("Yeah! Register Succesfull " + data.username);
+      alert("Yeah! Register Succesfull " + data.userName);
 
     },
       (error: any) => {

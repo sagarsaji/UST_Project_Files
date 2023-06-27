@@ -29,6 +29,7 @@ import { RestaurantComponent } from './user-dashboard/restaurant/restaurant.comp
 import { NavbaruserComponent } from './user-dashboard/navbaruser/navbaruser.component';
 import { MenuuserComponent } from './user-dashboard/menuuser/menuuser.component';
 import { BannerComponent } from './user-dashboard/banner/banner.component';
+import { ForbiddenComponent } from './forbidden/forbidden.component';
 
 
 @NgModule({
@@ -56,7 +57,8 @@ import { BannerComponent } from './user-dashboard/banner/banner.component';
     RestaurantComponent,
     NavbaruserComponent,
     MenuuserComponent,
-    BannerComponent
+    BannerComponent,
+    ForbiddenComponent
   ],
   imports: [
     BrowserModule,

@@ -40,8 +40,8 @@ public class CartService {
      * @return the list of Cart objects if found, otherwise null
      */
     @Transactional
-    public List<Cart> getByUserId(int userId) {
-        List<Cart> userCarts = cartRepo.findByUserid(userId);
+    public List<Cart> getByUserId(Long userid) {
+        List<Cart> userCarts = cartRepo.findByUserid(userid);
         if (userCarts != null)
             return userCarts;
         else
@@ -81,8 +81,8 @@ public class CartService {
      * @param userId the userId to delete
      */
     @Transactional
-    public void deleteCartByCartIdAndUserId(Long cartId, Long userId) {
-        cartRepo.deleteByCartidAndUserid(cartId, userId);
+    public void deleteCartByCartIdAndUserId(Long cartid, Long userid) {
+        cartRepo.deleteByCartidAndUserid(cartid, userid);
         System.out.println("deleted");
     }
 

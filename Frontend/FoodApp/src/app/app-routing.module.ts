@@ -18,6 +18,8 @@ import { SignupComponent } from './signup/signup.component';
 import { MenuuserComponent } from './user-dashboard/menuuser/menuuser.component';
 import { UserDashboardComponent } from './user-dashboard/user-dashboard.component';
 import { UserpageComponent } from './user-dashboard/userpage/userpage.component';
+import { AuthGuard } from './_auth/auth.guard.service';
+import { ForbiddenComponent } from './forbidden/forbidden.component';
 
 
 
@@ -25,20 +27,21 @@ const routes: Routes = [
   {path:'',component:UserDashboardComponent},
   {path:'login', component: LoginComponent},
   {path:'signup', component: SignupComponent},
-  {path:'user', component: UserpageComponent},
-  {path:'kitchen', component: KitchenstaffDashboardComponent},
-  {path:'create',component:CreateComponent},
-  {path:'product',component:ListComponent},
+  {path:'user', component: UserpageComponent,canActivate:[AuthGuard], data:{roles:['User']}},
+  {path:'kitchen', component: KitchenstaffDashboardComponent,canActivate:[AuthGuard], data:{roles:['KitchenStaff']}},
+  {path:'create',component:CreateComponent,canActivate:[AuthGuard], data:{roles:['Admin']}},
+  {path:'product',component:ListComponent,canActivate:[AuthGuard], data:{roles:['Admin']}},
   {path:'about',component:AboutComponent},
-  {path:'addmenu',component:AddmenuComponent},
-  {path:'menu',component:MenuComponent},
-  {path:'viewmenu/:restname',component:SpecificmenuComponent},
-  {path:'addtocart',component:AddtocartComponent},
-  {path:'update/:id',component:UpdateComponent},
-  {path:'addkitchenstaff',component:AddkitchenstaffComponent},
-  {path:`menuupdate/:mid`,component:MenuupdateComponent},
+  {path:'addmenu',component:AddmenuComponent,canActivate:[AuthGuard], data:{roles:['Admin']}},
+  {path:'menu',component:MenuComponent,canActivate:[AuthGuard], data:{roles:['Admin']}},
+  {path:'viewmenu/:restname',component:SpecificmenuComponent,canActivate:[AuthGuard], data:{roles:['User']}},
+  {path:'addtocart',component:AddtocartComponent,canActivate:[AuthGuard], data:{roles:['User']}},
+  {path:'update/:id',component:UpdateComponent,canActivate:[AuthGuard], data:{roles:['Admin']}},
+  {path:'addkitchenstaff',component:AddkitchenstaffComponent,canActivate:[AuthGuard], data:{roles:['Admin']}},
+  {path:`menuupdate/:mid`,component:MenuupdateComponent,canActivate:[AuthGuard], data:{roles:['Admin']}},
   {path:`admin/login`,component:AdminloginComponent},
-  {path:`viewmenuuser/:restname`,component:MenuuserComponent}
+  {path:`viewmenuuser/:restname`,component:MenuuserComponent,canActivate:[AuthGuard], data:{roles:['User']}},
+  {path:'forbidden',component:ForbiddenComponent}
 ];
 
 @NgModule({

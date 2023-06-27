@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges } from '@angular/core';
+import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Addtocart } from '../modal/addtocart';
 import { Menu } from '../modal/menu';
@@ -31,9 +31,13 @@ export class AddtocartComponent implements OnInit,OnChanges {
     
   }
 
-  ngOnChanges(){
-    this.storeValuesInNewCart();
+  ngOnChanges(): void {
+      this.checkLog();
   }
+
+  // ngOnChanges(){
+  //   this.storeValuesInNewCart();
+  // }
 
 
 
@@ -64,6 +68,17 @@ export class AddtocartComponent implements OnInit,OnChanges {
       }
     }
     return total;
+  }
+
+  calculateQuantity() {
+    let qty = 0;
+    for (let cartItem of this.cartItem) {
+      if (cartItem.price !== undefined && cartItem.quantity !== undefined) {
+        //let price = parseInt(cartItem.price);
+        qty += cartItem.quantity;
+      }
+    }
+    return qty;
   }
   
   
