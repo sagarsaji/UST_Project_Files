@@ -8,7 +8,6 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="kitchenstaff-service" />
-        <module name="UserBookCapstone" />
         <module name="cart-service" />
         <module name="authentication-service" />
         <module name="ServiceRegistery" />
@@ -16,6 +15,9 @@
         <module name="admin-service" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="UserBookCapstone" target="17" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
