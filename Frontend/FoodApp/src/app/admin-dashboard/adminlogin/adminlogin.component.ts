@@ -18,6 +18,7 @@ export class AdminloginComponent {
   submitMessage!: string;
   flag: boolean = false;
   usertype!: string;
+  private isAuthenticated = false;
 
   constructor(private routerService: RouterServiceService, 
     private authservice: AuthenticateServiceService,private route:Router,
@@ -47,6 +48,7 @@ export class AdminloginComponent {
       if (data != null) {
         localStorage.setItem("key", this.submitMessage);
         this.flag = true;
+        this.setAuthenticated(true);
         
         this.userAuthService.setRoles(data.user.role);
         this.userAuthService.setToken(data.jwtToken);
@@ -65,6 +67,20 @@ export class AdminloginComponent {
       console.log("error");
       alert('You have entered incorrect Username or Password!');
     });
+  }
+
+  isAuthenticatedUser() {
+    return this.isAuthenticated;
+  }
+
+  setAuthenticated(status: boolean): void {
+    this.isAuthenticated = status;
+  }
+
+  logout() {
+    this.setAuthenticated(false);
+    localStorage.removeItem('token');
+    this.route.navigate(['/login']);
   }
 
     
