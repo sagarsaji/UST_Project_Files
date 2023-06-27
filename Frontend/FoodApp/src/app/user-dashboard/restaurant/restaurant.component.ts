@@ -61,5 +61,12 @@ export class RestaurantComponent {
     });
   }
 
+  alertmsg(): void {
+    const confirmation = window.confirm("You will only be able to choose items from one restaurant. Otherwise, cart items will be removed. Continue?");
+    if (confirmation) {
+      this.router.navigate(['/viewmenu/:restname']);
+    }
+  }
+
  
 }

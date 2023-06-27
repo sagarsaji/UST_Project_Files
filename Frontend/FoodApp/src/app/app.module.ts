@@ -30,6 +30,7 @@ import { NavbaruserComponent } from './user-dashboard/navbaruser/navbaruser.comp
 import { MenuuserComponent } from './user-dashboard/menuuser/menuuser.component';
 import { BannerComponent } from './user-dashboard/banner/banner.component';
 import { ForbiddenComponent } from './forbidden/forbidden.component';
+import { PaymentComponent } from './user-dashboard/payment/payment.component';
 
 
 @NgModule({
@@ -58,7 +59,8 @@ import { ForbiddenComponent } from './forbidden/forbidden.component';
     NavbaruserComponent,
     MenuuserComponent,
     BannerComponent,
-    ForbiddenComponent
+    ForbiddenComponent,
+    PaymentComponent
   ],
   imports: [
     BrowserModule,

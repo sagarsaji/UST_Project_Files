@@ -34,12 +34,10 @@
                     title="Remove item">
                     <i class="fas fa-trash"></i>
                   </button>
-                  <button type="button" class="btn btn-danger btn-sm mb-2" data-mdb-toggle="tooltip"
-                    title="Move to the wish list">
-                    <i class="fas fa-heart"></i>
-                  </button>
                   <!-- Data -->
                 </div>
+
+                
   
                 <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
                   <!-- Quantity -->
@@ -65,12 +63,14 @@
   
                   <!-- Price -->
                   <p class="text-start text-md-center">
-                    <strong>₹{{cartdet.total}}</strong>
+                    <strong>₹{{cartdet.total*cartdet.quantity}}</strong>
                   </p>
                   <!-- Price -->
                 </div>
+                <hr>
               </div>
             </div>
+            
           </div>
           
         
@@ -100,7 +100,7 @@
                 </li>
               </ul>
   
-              <button type="button" class="btn btn-primary btn-lg btn-block">
+              <button type="button" class="btn btn-primary btn-lg btn-block" routerLink="/payment">
                 Go to checkout
               </button>
             </div>

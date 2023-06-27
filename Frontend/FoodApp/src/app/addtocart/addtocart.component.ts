@@ -11,7 +11,7 @@ import { AuthenticateServiceService } from '../service/authenticate-service.serv
   templateUrl: './addtocart.component.html',
   styleUrls: ['./addtocart.component.css']
 })
-export class AddtocartComponent implements OnInit,OnChanges {
+export class AddtocartComponent implements OnInit {
 
   constructor(private cartser: RestaurantService, private router: Router,
     private route: ActivatedRoute, private user: AuthenticateServiceService,
@@ -27,20 +27,10 @@ export class AddtocartComponent implements OnInit,OnChanges {
     // this.userid = this.route.snapshot.params['userid'];
     // console.log(this.userid);
     this.checkLog();
-    // this.storeValuesInNewCart();
-    
+    this.storeValuesInNewCart();
   }
 
-  ngOnChanges(): void {
-      this.checkLog();
-  }
-
-  // ngOnChanges(){
-  //   this.storeValuesInNewCart();
-  // }
-
-
-
+ 
   storeValuesInNewCart(): void {
     if (this.restnme && this.useridd) {
       this.cartser.getCartDetails(this.useridd).subscribe(
@@ -64,7 +54,8 @@ export class AddtocartComponent implements OnInit,OnChanges {
     for (let cartItem of this.cartItem) {
       if (cartItem.price !== undefined && cartItem.quantity !== undefined) {
         //let price = parseInt(cartItem.price);
-        total += cartItem.total;
+        // total += cartItem.total;
+        total += cartItem.price*cartItem.quantity;
       }
     }
     return total;
@@ -74,7 +65,6 @@ export class AddtocartComponent implements OnInit,OnChanges {
     let qty = 0;
     for (let cartItem of this.cartItem) {
       if (cartItem.price !== undefined && cartItem.quantity !== undefined) {
-        //let price = parseInt(cartItem.price);
         qty += cartItem.quantity;
       }
     }
@@ -87,7 +77,7 @@ export class AddtocartComponent implements OnInit,OnChanges {
 
   checkLog(): void {
     if (!this.service.isAuthenticated()) {
-      this.router.navigate(['/user']);
+      this.router.navigate(['/login']);
     } else {
       this.storeValuesInNewCart();
     }

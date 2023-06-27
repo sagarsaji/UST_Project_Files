@@ -1,7 +1,7 @@
 <body>
     <h1 style="font-style: italic; margin-bottom: 30px; text-shadow: 30px;
 text-align: center; text-decoration: underline;">Our Restaurant</h1>
-    <div class="container">
+    <div class="container" (click)="alertmsg()">
       <div class="row">
         <div class="col-md-4"  *ngFor="let restaurant of rest">
           <div class="card" (click)="checkLogin(restaurant)">

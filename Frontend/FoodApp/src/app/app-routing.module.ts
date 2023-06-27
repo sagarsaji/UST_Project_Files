@@ -20,6 +20,7 @@ import { UserDashboardComponent } from './user-dashboard/user-dashboard.componen
 import { UserpageComponent } from './user-dashboard/userpage/userpage.component';
 import { AuthGuard } from './_auth/auth.guard.service';
 import { ForbiddenComponent } from './forbidden/forbidden.component';
+import { PaymentComponent } from './user-dashboard/payment/payment.component';
 
 
 
@@ -41,7 +42,8 @@ const routes: Routes = [
   {path:`menuupdate/:mid`,component:MenuupdateComponent,canActivate:[AuthGuard], data:{roles:['Admin']}},
   {path:`admin/login`,component:AdminloginComponent},
   {path:`viewmenuuser/:restname`,component:MenuuserComponent,canActivate:[AuthGuard], data:{roles:['User']}},
-  {path:'forbidden',component:ForbiddenComponent}
+  {path:'forbidden',component:ForbiddenComponent},
+  {path:'payment',component:PaymentComponent}
 ];
 
 @NgModule({

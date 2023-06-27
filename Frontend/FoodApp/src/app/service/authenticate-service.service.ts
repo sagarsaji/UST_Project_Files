@@ -82,4 +82,9 @@ export class AuthenticateServiceService {
   retrieveUserId() {
     return this.userid;
   }
+
+  getLoggedInUser(userid: number): Observable<Object>{
+    return this.httpClient.get(`http://localhost:8088/api/auth/getUserByUserid/${userid}`);
+  }
+
 }

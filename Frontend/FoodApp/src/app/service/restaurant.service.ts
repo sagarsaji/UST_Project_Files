@@ -81,5 +81,7 @@ export class RestaurantService {
   getTotal(cartid: number): Observable<number> {
     return this.http.get<number>(`http://localhost:8082/api/v1/cart/gettotal/${cartid}`);
   }
+
+ 
   
 }

@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.ws.rs.core.Response;
 import java.util.*;
 
 import static java.lang.Long.MIN_VALUE;
@@ -106,6 +107,15 @@ public class UserService {
 
     private String getEncodedPassword(String password) {
         return passwordEncoder.encode(password);
+    }
+
+    public ResponseEntity<User> getUserByUserid(long userid) {
+        User u = null;
+        Optional<User> opt = userRepository.findByUserid(userid);
+        if(opt.isPresent()){
+            u = opt.get();
+        }
+        return ResponseEntity.ok().body(u);
     }
 
     public class IdGenerator {

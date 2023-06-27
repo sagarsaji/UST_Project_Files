@@ -50,4 +50,9 @@ public class UserController {
     public String forKitchenstaff(){
         return "This URL is only accessible to the kitchen staff";
     }
+
+    @GetMapping("/getUserByUserid/{userid}")
+    public ResponseEntity<User> getUserByUserid(@PathVariable long userid){
+        return userService.getUserByUserid(userid);
+    }
 }
