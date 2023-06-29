@@ -5,4 +5,7 @@ export class Kitchenstaff {
     kspassword:string | undefined;
     restname: string | undefined;
     type!: string;
+    foodid:number=0;
+    foodname:string | undefined;
+    foodstatus: string | undefined;
 }

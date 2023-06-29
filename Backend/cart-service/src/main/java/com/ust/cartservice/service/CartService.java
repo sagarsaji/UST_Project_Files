@@ -4,6 +4,7 @@ import com.ust.cartservice.exception.CartnotFoundException;
 import com.ust.cartservice.modal.Cart;
 import com.ust.cartservice.repository.CartRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
@@ -162,5 +163,23 @@ public class CartService {
             c = opt.get();
         }
         return c.getTotal();
+    }
+
+    public Cart updateStatus(Long cartid) {
+        Cart c = null;
+        Optional<Cart> opt = cartRepo.findById(cartid);
+        if(opt.isPresent()){
+            c = opt.get();
+            c.setStatus("Ready");
+        }
+        return cartRepo.save(c);
+    }
+
+    public List<Cart> getAllOrders() {
+        return cartRepo.findAll();
+    }
+
+    public List<Cart> getByStatus() {
+        return cartRepo.getByStatus();
     }
 }

@@ -31,6 +31,11 @@ import { MenuuserComponent } from './user-dashboard/menuuser/menuuser.component'
 import { BannerComponent } from './user-dashboard/banner/banner.component';
 import { ForbiddenComponent } from './forbidden/forbidden.component';
 import { PaymentComponent } from './user-dashboard/payment/payment.component';
+import { KitchenloginComponent } from './kitchenstaff-dashboard/kitchenlogin/kitchenlogin.component';
+import { CommonModule } from '@angular/common';
+import { KitchenmainComponent } from './kitchenstaff-dashboard/kitchenmain/kitchenmain.component';
+
+
 
 
 @NgModule({
@@ -60,14 +65,17 @@ import { PaymentComponent } from './user-dashboard/payment/payment.component';
     MenuuserComponent,
     BannerComponent,
     ForbiddenComponent,
-    PaymentComponent
+    PaymentComponent,
+    KitchenloginComponent,
+    KitchenmainComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    CommonModule
   ],
   providers: [],
   bootstrap: [AppComponent]

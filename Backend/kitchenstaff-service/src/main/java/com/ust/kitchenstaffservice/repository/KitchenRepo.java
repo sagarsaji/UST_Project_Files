@@ -10,7 +10,5 @@ import java.util.Optional;
 @Repository
 public interface KitchenRepo extends JpaRepository<Kitchenstaff,Long> {
     List<Kitchenstaff> findAllByRestname(String restname);
-
-
     Optional<Kitchenstaff> findByUserid(Long userid);
 }

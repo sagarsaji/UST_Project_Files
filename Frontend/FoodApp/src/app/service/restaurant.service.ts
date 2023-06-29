@@ -82,6 +82,12 @@ export class RestaurantService {
     return this.http.get<number>(`http://localhost:8082/api/v1/cart/gettotal/${cartid}`);
   }
 
- 
+ getAllOrder():Observable<Addtocart[]>{
+  return this.http.get<Addtocart[]>('http://localhost:8082/api/v1/cart/sortbystatus');
+ }
+
+ updateOrderStatus(cartid: number):Observable<Object>{
+  return this.http.put(`http://localhost:8083/api/v1/staff/orders/${cartid}`,{});
+ }
   
 }

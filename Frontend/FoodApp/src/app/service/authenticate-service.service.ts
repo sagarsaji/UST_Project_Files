@@ -53,6 +53,10 @@ export class AuthenticateServiceService {
     return this.httpClient.get<any>(`http://localhost:8088/api/user/details/${username}`);
   }
 
+  getKitchenUserByUsername(username: string){
+    return this.httpClient.get<any>(`http://localhost:8088/api/auth/getUserByUsername/${username}`);
+  }
+
   isAuthenticated(): boolean {
     return this.authenticated;
   }

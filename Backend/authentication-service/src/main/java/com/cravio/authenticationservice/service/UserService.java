@@ -118,6 +118,10 @@ public class UserService {
         return ResponseEntity.ok().body(u);
     }
 
+    public User getUserByUserName(String userName) {
+        return userRepository.findByUserName(userName);
+    }
+
     public class IdGenerator {
         public static long generateUniqueId(){
             Random random = new Random();

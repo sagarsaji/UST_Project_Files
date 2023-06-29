@@ -19,4 +19,7 @@ public interface CartRepository extends JpaRepository<Cart,Long> {
     Optional<Cart> findByProdid(Long prodid);
 
     List<Cart> findByUserid(Long userid);
+
+    @Query(value = "SELECT * FROM cart c ORDER BY c.status",nativeQuery = true)
+    List<Cart> getByStatus();
 }

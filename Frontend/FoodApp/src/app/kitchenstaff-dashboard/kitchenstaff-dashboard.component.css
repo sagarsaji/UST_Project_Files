@@ -41,9 +41,9 @@ body {
     margin-right: 5px;
   }
 
-  .button-container .button:hover {
+  /* .button-container .button:hover {
     background-color: #222;
-  }
+  } */
 
   .kitchen-staff-container {
     display: flex;

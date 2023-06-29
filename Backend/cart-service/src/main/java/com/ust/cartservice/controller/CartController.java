@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.ws.rs.Path;
 import java.util.List;
 
 @RestController
@@ -38,6 +39,15 @@ public class CartController {
     }
 
 
+    @GetMapping("/orders")
+    public ResponseEntity<List<Cart>> getAllOrders(){
+        return ResponseEntity.ok(cartServ.getAllOrders());
+    }
+
+    @PutMapping("/update/orderstatus/{cartid}")
+    public ResponseEntity<Cart> updateStatus(@PathVariable Long cartid){
+        return ResponseEntity.ok(cartServ.updateStatus(cartid));
+    }
 
     @GetMapping("/{restname}")
     public ResponseEntity<List<Cart>> viewByRestname(@PathVariable String restname){
@@ -79,6 +89,16 @@ public class CartController {
     @GetMapping("/gettotal/{cartid}")
     public ResponseEntity<Long> getTotal(@PathVariable Long cartid){
         return ResponseEntity.ok(cartServ.getTotalAmount(cartid));
+    }
+
+//    @PutMapping("/status/{cartid}")
+//    public ResponseEntity<Cart> updateStatus(@PathVariable Long cartid){
+//        return ResponseEntity.ok(cartServ.updateStatus(cartid));
+//    }
+
+    @GetMapping("/sortbystatus")
+    public ResponseEntity<List<Cart>> getByStatus(){
+        return new ResponseEntity<List<Cart>>(cartServ.getByStatus(),HttpStatus.OK);
     }
 
 }

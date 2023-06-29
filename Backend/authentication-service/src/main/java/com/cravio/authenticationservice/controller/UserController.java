@@ -55,4 +55,9 @@ public class UserController {
     public ResponseEntity<User> getUserByUserid(@PathVariable long userid){
         return userService.getUserByUserid(userid);
     }
+
+    @GetMapping("/getUserByUsername/{userName}")
+    public User getUserByUsername(@PathVariable String userName){
+        return userService.getUserByUserName(userName);
+    }
 }
