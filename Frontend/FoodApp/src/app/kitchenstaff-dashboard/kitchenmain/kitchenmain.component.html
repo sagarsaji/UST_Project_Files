@@ -27,11 +27,15 @@
           </li>
         </ul>
         <h1 style="text-align: center;">Kitchen Staff Home Page</h1>
-        <form class="d-flex" role="search">
+        <!-- <form class="d-flex" role="search">
           <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off"
             placeholder="Search" (input)="onSearch()" (click)="onSearch()">
           <button class="btn btn-outline-success btn-md" type="submit"><i class="las la-search"></i></button>
-        </form>
+        </form> -->
+        <div class="search-container">
+          <input  type="text" placeholder="Search food" [(ngModel)]="searchQuery" (input)="search()" />
+          <button class="search-button" (click)="search()">Search</button>
+        </div>
       </div>
     </nav>
 

@@ -132,7 +132,7 @@ public class CartService {
     public Cart dupdateQuantity(Long cartid) {
         Cart c = cartRepo.findById(cartid).orElse(null);
         if(c!=null){
-            if(c.getQuantity()>0) {
+            if(c.getQuantity()>1) {
                 c.setQuantity(c.getQuantity() - 1);
                 c.setTotal(c.getQuantity() * c.getPrice());
             }

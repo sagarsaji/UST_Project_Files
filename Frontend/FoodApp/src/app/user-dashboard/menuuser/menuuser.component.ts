@@ -84,5 +84,7 @@ export class MenuuserComponent {
    else {
     alert("User ID is null. Unable to add to cart.");
   }
+  
+
   }
 }

@@ -24,23 +24,59 @@ export class KitchenmainComponent {
   ];
   orders:Addtocart[]=[];
   orderItem:any;
+  searchQuery!:string;
   // CartService: any;
   constructor(private cart:RestaurantService){}
   ngOnInit(): void {
     // this.cart.getAllProducts().subscribe(data => this.orderItem = data);
     // console.log(this.orderItem);
+    // this.orderItem=this.fetchOrders();
     this.fetchOrders();
-      
+    
+  }
+
+  search(): void {
+    if (this.searchQuery) {
+      this.orders = this.orderItem.filter(
+        (fd: any) =>
+          fd.prodname.toLowerCase().includes(this.searchQuery.toLowerCase())
+      );
+    } else {
+      this.orders = [...this.orderItem];
+    }
+  }
+  
+  private fetchOrders(): void {
+    this.cart.getAllOrder().subscribe(
+      (data: any[]) => {
+        this.orderItem = data;
+        this.orders = [...this.orderItem];
+      },
+      (error: any) => {
+        console.error(error);
+      }
+    );
   }
   
 
+// search(){
+//   if(this.searchQuery){
+//     this.orders=this.orderItem.filter(
+//       (fd:any) =>
+//         fd.prodname.toLowerCase().includes(this.searchQuery.toLowerCase())
+//     );
+//   }else{
+//     this.orders=[...this.orderItem];
+//   }
+// }
 
 
-  private fetchOrders(){
-    this.cart.getAllOrder().subscribe(data=>{
-      this.orders=data;
-    });
-  }
+//   private fetchOrders(){
+//     this.cart.getAllOrder().subscribe(data=>{
+//       this.orders=data;
+//       console.log(this.orders);
+//     });
+//   }
 
   changeStatus(order: Addtocart) {
     
@@ -61,21 +97,23 @@ export class KitchenmainComponent {
   }
 
 
-  onSearch() {
-    const search = this.searchText.toLowerCase();
+  // onSearch() {
+  //   const search = this.searchText.toLowerCase();
     
-    if (search === '') {
-      this.orders = this.orders;
-    } else {
-      this.orders = this.orders.filter(order => {
-        return (
-          (order.cartid && order.cartid.toString().includes(search)) ||
-          (order.prodname && order.prodname.toLowerCase().includes(search)) ||
-          (order.status && order.status.toLowerCase().includes(search))
-        );
-      });
-    }
-  }
+  //   if (search === '') {
+  //     this.orders = this.orders;
+  //   } else {
+  //     this.orders = this.orders.filter(order => {
+  //       return (
+  //         (order.cartid && order.cartid.toString().includes(search)) ||
+  //         (order.prodname && order.prodname.toLowerCase().includes(search)) ||
+  //         (order.status && order.status.toLowerCase().includes(search))
+  //       );
+  //     });
+  //   }
+  // }
+
+
   
   
   

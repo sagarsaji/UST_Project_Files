@@ -28,9 +28,10 @@ export class AddtocartComponent implements OnInit {
     // console.log(this.userid);
     this.checkLog();
     this.storeValuesInNewCart();
+    
   }
 
- 
+  
   storeValuesInNewCart(): void {
     if (this.restnme && this.useridd) {
       this.cartser.getCartDetails(this.useridd).subscribe(
@@ -47,6 +48,7 @@ export class AddtocartComponent implements OnInit {
         }
       );
     }
+    // location.reload();
   }
 
   calculateTotal() {
@@ -88,6 +90,7 @@ export class AddtocartComponent implements OnInit {
   increment(cartid: number){
     this.cartser.updateIncrement(cartid).subscribe(
       (data) => {
+        location.reload();
         console.log(data);
       }
     )
@@ -99,6 +102,7 @@ export class AddtocartComponent implements OnInit {
   decrement(cartid: number){
     this.cartser.updateDecrement(cartid).subscribe(
       (data) => {
+        location.reload();
         console.log(data);
       }
     )

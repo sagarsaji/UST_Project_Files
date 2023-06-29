@@ -27,6 +27,7 @@ export class AuthenticateServiceService {
     return this.httpClient.post<Signup>(`http://localhost:8088/api/auth/registerNewKitchenStaff`, signup);
   }
 
+  restname!:any;
   getusers(userr: Login) {
     console.log("GET USER");
     console.log(userr.userName);
@@ -43,6 +44,8 @@ export class AuthenticateServiceService {
           console.log("my id is " + id);
           localStorage.setItem('myuseridd', id);
           this.userid = id;
+          this.restname=userData.userFirstName;
+          localStorage.setItem('myrestname', this.restname);
           return userData;
         }
       )

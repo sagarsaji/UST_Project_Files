@@ -44,9 +44,8 @@ export class KitchenloginComponent implements OnInit{
         // this.flag = true;
         this.setAuthenticated(true);
         localStorage.setItem('kitchenuser',this.loginForm.value.username);
-        this.restname=data.userFirstName;
-        localStorage.setItem('myrestname', this.restname);
-        this.userAuthService.setRoles(data.role);
+        
+        this.userAuthService.setRoles(data.user.role);
         this.userAuthService.setToken(data.jwtToken);
 
         // if (data.user.userFirstName) {
@@ -54,7 +53,9 @@ export class KitchenloginComponent implements OnInit{
         //   
         // }
 
-          const role = data.role[0].roleName;
+
+
+          const role = data.user.role[0].roleName;
           if(role==='KitchenStaff'){
             this.route.navigate(['/kitchen']);
           }
