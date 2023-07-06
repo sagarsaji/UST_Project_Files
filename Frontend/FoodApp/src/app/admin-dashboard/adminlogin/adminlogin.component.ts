@@ -3,6 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserAuthService } from 'src/app/authservice/user-auth.service';
 import { Login } from 'src/app/modal/login';
+import { AdminloginserviceService } from 'src/app/service/adminloginservice.service';
 import { AuthenticateServiceService } from 'src/app/service/authenticate-service.service';
 import { RouterServiceService } from 'src/app/service/router-service.service';
 
@@ -22,7 +23,7 @@ export class AdminloginComponent {
 
   constructor(private routerService: RouterServiceService, 
     private authservice: AuthenticateServiceService,private route:Router,
-    private userAuthService: UserAuthService) {
+    private userAuthService: UserAuthService,private auth:AdminloginserviceService) {
 
     this.adminForm = new FormGroup({
       username: new FormControl(),
@@ -48,7 +49,7 @@ export class AdminloginComponent {
       if (data != null) {
         localStorage.setItem("key", this.submitMessage);
         this.flag = true;
-        this.setAuthenticated(true);
+        this.auth.isAuthenticated=true;
         
         this.userAuthService.setRoles(data.user.role);
         this.userAuthService.setToken(data.jwtToken);
@@ -69,19 +70,8 @@ export class AdminloginComponent {
     });
   }
 
-  isAuthenticatedUser() {
-    return this.isAuthenticated;
-  }
+ 
 
-  setAuthenticated(status: boolean): void {
-    this.isAuthenticated = status;
-  }
-
-  logout() {
-    this.setAuthenticated(false);
-    localStorage.removeItem('token');
-    this.route.navigate(['/login']);
-  }
 
     
   }

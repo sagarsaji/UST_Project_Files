@@ -5,6 +5,8 @@ import { Addtocart } from '../modal/addtocart';
 import { Menu } from '../modal/menu';
 import { Restaurant } from '../modal/restaurant';
 import { LoginComponent } from '../login/login.component';
+import { Orderhistory } from '../modal/orderhistory';
+import { Kitchenstaff } from '../modal/kitchenstaff';
 
 @Injectable({
   providedIn: 'root'
@@ -82,12 +84,32 @@ export class RestaurantService {
     return this.http.get<number>(`http://localhost:8082/api/v1/cart/gettotal/${cartid}`);
   }
 
- getAllOrder():Observable<Addtocart[]>{
-  return this.http.get<Addtocart[]>('http://localhost:8082/api/v1/cart/sortbystatus');
+ getAllOrder():Observable<Kitchenstaff[]>{
+  return this.http.get<Kitchenstaff[]>('http://localhost:8083/api/v1/staff/sortbystatus');
  }
 
  updateOrderStatus(cartid: number):Observable<Object>{
   return this.http.put(`http://localhost:8083/api/v1/staff/orders/${cartid}`,{});
+ }
+
+ deleteByCart(cartid:number):Observable<Addtocart>{
+  return this.http.delete<Addtocart>(`http://localhost:8082/api/v1/cart/del/cart/${cartid}`);
+ }
+
+ getOrderByUserId(userid: number){
+  return this.http.get<Addtocart[]>(`http://localhost:8082/api/v1/cart/viewByuser/${userid}`);
+ }
+
+ toOrderHistory(order: Orderhistory):Observable<Object>{
+    return this.http.post(`http://localhost:8083/api/v1/staff/addOrders`,order);
+ }
+
+ getUserOrders(userid: number){
+  return this.http.get(`http://localhost:8083/api/v1/staff/getbyuserid/${userid}`);
+ }
+
+ deleteByUserid(userid:number):Observable<Addtocart>{
+  return this.http.delete<Addtocart>(`http://localhost:8082/api/v1/cart/del/${userid}`);
  }
   
 }

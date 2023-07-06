@@ -1,0 +1,21 @@
+<app-navbaruser></app-navbaruser>
+<div class="container">
+    <h2 class="text-center mb-4 mt-4">Order Details</h2>
+    <table class="table table-bordered text-center">
+      <thead>
+        <tr>
+          <th>Cart ID</th>
+          <th>Food Name</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let order of myorder">
+          <td>{{order.cartid}}</td>
+          <td>{{order.prodname}}</td>
+          <td>{{order.status}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

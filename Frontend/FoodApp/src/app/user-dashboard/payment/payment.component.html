@@ -1,63 +1,75 @@
 <app-navbaruser></app-navbaruser>
 <div class="wrapper">
-    <h2>Payment Form</h2>
-    <form [formGroup]="paymentForm" (ngSubmit)="submitForm()">
-      <!-- ... -->
-  
-      <div class="input-group">
-        <div class="input-box">
-          <input type="text" placeholder="Full Name" formControlName="name">
-          <i class="fa fa-user icon"></i>
-        </div>
+  <h2>Payment Form</h2>
+  <form [formGroup]="paymentForm" (ngSubmit)="submitForm()">
+    <!-- ... -->
+
+    <div class="input-group">
+      <label for="userid">User ID</label>
+      <div class="input-box">
+        <input type="text" id="userid" placeholder="User ID" formControlName="userid">
+        <i class="fa fa-user icon"></i>
       </div>
-      <div class="validation-message" *ngIf="paymentForm.get('name')?.invalid && (paymentForm.get('name')?.dirty || paymentForm.get('name')?.touched)">
-        Full Name is required.
+    </div>
+
+    <div class="input-group">
+      <label for="name">Full Name</label>
+      <div class="input-box">
+        <input type="text" id="name" placeholder="Full Name" formControlName="name">
+        <i class="fa fa-user icon"></i>
       </div>
-  
-      <div class="input-group">
-        <div class="input-box">
-          <input type="email" placeholder="Email Address" formControlName="email">
-          <i class="fa fa-envelope icon"></i>
-        </div>
+    </div>
+    <div class="validation-message" *ngIf="paymentForm.get('name')?.invalid && (paymentForm.get('name')?.dirty || paymentForm.get('name')?.touched)">
+      Full Name is required.
+    </div>
+
+    <div class="input-group">
+      <label for="email">Email Address</label>
+      <div class="input-box">
+        <input type="email" id="email" placeholder="Email Address" formControlName="email">
+        <i class="fa fa-envelope icon"></i>
       </div>
-      <div class="validation-message" *ngIf="paymentForm.get('email')?.invalid && (paymentForm.get('email')?.dirty || paymentForm.get('email')?.touched)">
-        Email Address is required and must be a valid email.
+    </div>
+    <div class="validation-message" *ngIf="paymentForm.get('email')?.invalid && (paymentForm.get('email')?.dirty || paymentForm.get('email')?.touched)">
+      Email Address is required and must be a valid email.
+    </div>
+
+    <div class="input-group">
+      <label for="cardNumber">Card Number</label>
+      <div class="input-box">
+        <input type="text" id="cardNumber" placeholder="Card Number" formControlName="cardNumber" maxlength="12">
+        <i class="fa fa-credit-card icon"></i>
       </div>
-  
-      <div class="input-group">
-        <div class="input-box">
-          <input type="text" placeholder="Card Number" formControlName="cardNumber" maxlength="12">
-          <i class="fa fa-credit-card icon"></i>
-        </div>
+    </div>
+    <div class="validation-message" *ngIf="paymentForm.get('cardNumber')?.invalid && (paymentForm.get('cardNumber')?.dirty || paymentForm.get('cardNumber')?.touched)">
+      Card Number is required and must be 12 digits.
+    </div>
+
+    <div class="input-group">
+      <label for="cardCvc">Card CVC</label>
+      <div class="input-box">
+        <input type="password" id="cardCvc" placeholder="Card CVC" formControlName="cardCvc" maxlength="3">
+        <i class="fa fa-user icon"></i>
       </div>
-      <div class="validation-message" *ngIf="paymentForm.get('cardNumber')?.invalid && (paymentForm.get('cardNumber')?.dirty || paymentForm.get('cardNumber')?.touched)">
-        Card Number is required and must be 12 digits.
+    </div>
+    <div class="validation-message" *ngIf="paymentForm.get('cardCvc')?.invalid && (paymentForm.get('cardCvc')?.dirty || paymentForm.get('cardCvc')?.touched)">
+      Card CVC is required and must be 3 digits.
+    </div>
+
+    <!-- ... -->
+
+    <div class="input-group">
+      <div class="input-box">
+        <button type="submit" (click)="toKitchen()">PAY</button>
       </div>
-  
-      <div class="input-group">
-        <div class="input-box">
-          <input type="password" placeholder="Card CVC" formControlName="cardCvc" maxlength="3">
-          <i class="fa fa-user icon"></i>
-        </div>
+    </div>
+
+    <div class="overlay" *ngIf="showSuccess">
+      <div class="popup">
+       <p>Your Order has been Submitted. Thankyou!</p>
+        <button routerLink="/myorders">View Order History</button>
+        <button class="close-button" routerLink="/user">Go to Home</button>
       </div>
-      <div class="validation-message" *ngIf="paymentForm.get('cardCvc')?.invalid && (paymentForm.get('cardCvc')?.dirty || paymentForm.get('cardCvc')?.touched)">
-        Card CVC is required and must be 3 digits.
-      </div>
-  
-      <!-- ... -->
-  
-      <div class="input-group">
-        <div class="input-box">
-          <button type="submit">PAY</button>
-        </div>
-      </div>
-  
-      <div class="overlay" *ngIf="showSuccess">
-        <div class="popup">
-          <p>Your Order has been Submitted. Thankyou!</p>
-          <button class="close-button" (click)="closeSuccessMessage()">Close</button>
-        </div>
-      </div>
-    </form>
-  </div>
-  
+    </div>
+  </form>
+</div>

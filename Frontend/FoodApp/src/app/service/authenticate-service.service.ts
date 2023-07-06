@@ -46,6 +46,7 @@ export class AuthenticateServiceService {
           this.userid = id;
           this.restname=userData.userFirstName;
           localStorage.setItem('myrestname', this.restname);
+          this.setAuthenticated(true);
           return userData;
         }
       )
@@ -69,9 +70,8 @@ export class AuthenticateServiceService {
   }
 
   logout() {
-    this.authenticated = false;
-    localStorage.removeItem('token');
-    localStorage.removeItem('myuseridd');
+    this.setAuthenticated(false);
+    localStorage.clear();
     this.route.navigate(['/user']);
   }
 

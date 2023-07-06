@@ -22,4 +22,8 @@ public interface CartRepository extends JpaRepository<Cart,Long> {
 
     @Query(value = "SELECT * FROM cart c ORDER BY c.status",nativeQuery = true)
     List<Cart> getByStatus();
+
+    void deleteByUserid(Long userid);
+
+    void deleteByCartid(Long cartid);
 }

@@ -171,7 +171,13 @@
     padding: 20px;
     border-radius: 5px;
     text-align: center;
+    
 }
+
+.popup button {
+  margin-right: 10px; /* Adjust the margin value as per your preference */
+}
+
 
 .validation-message {
     color: red;

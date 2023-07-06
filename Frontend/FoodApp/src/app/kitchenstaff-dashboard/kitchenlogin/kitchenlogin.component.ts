@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { UserAuthService } from 'src/app/authservice/user-auth.service';
 import { Login } from 'src/app/modal/login';
 import { AuthenticateServiceService } from 'src/app/service/authenticate-service.service';
+import { KitchenstaffDashboardComponent } from '../kitchenstaff-dashboard.component';
+import { KitchenloginserviceService } from 'src/app/service/kitchenloginservice.service';
 
 @Component({
   selector: 'app-kitchenlogin',
@@ -14,10 +16,10 @@ export class KitchenloginComponent implements OnInit{
 
   loginForm!: FormGroup;
   login:Login=new Login();
-  private isAuthenticated:boolean=false;
 
   constructor(private formBuilder: FormBuilder,private authservice:AuthenticateServiceService,
-    private route:Router,private userAuthService:UserAuthService) { }
+    private route:Router,private userAuthService:UserAuthService,
+    private auth:KitchenloginserviceService) { }
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
@@ -40,20 +42,11 @@ export class KitchenloginComponent implements OnInit{
       console.log(data);
 
       if (data != null) {
-        // localStorage.setItem("key", this.submitMessage);
-        // this.flag = true;
-        this.setAuthenticated(true);
-        localStorage.setItem('kitchenuser',this.loginForm.value.username);
-        
+        this.auth.setAuthenticated(true);
+        this.restname=data.user.userFirstName;
+        localStorage.setItem('myrestauname',this.restname);
         this.userAuthService.setRoles(data.user.role);
         this.userAuthService.setToken(data.jwtToken);
-
-        // if (data.user.userFirstName) {
-        //   const restname = data.userFirstName;
-        //   
-        // }
-
-
 
           const role = data.user.role[0].roleName;
           if(role==='KitchenStaff'){
@@ -71,19 +64,6 @@ export class KitchenloginComponent implements OnInit{
     });
   }
 
-  isAuthenticatedUser() {
-    return this.isAuthenticated;
-  }
-
-  setAuthenticated(status: boolean): void {
-    this.isAuthenticated = status;
-  }
-
-  logout() {
-    this.setAuthenticated(false);
-    localStorage.removeItem('token');
-    this.route.navigate(['/login']);
-  }
 
 }
 

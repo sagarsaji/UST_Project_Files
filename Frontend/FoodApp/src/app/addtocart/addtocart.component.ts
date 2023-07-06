@@ -24,23 +24,26 @@ export class AddtocartComponent implements OnInit {
   restnme = localStorage.getItem('restaurantname');
 
   ngOnInit(): void {
-    // this.userid = this.route.snapshot.params['userid'];
-    // console.log(this.userid);
-    this.checkLog();
     this.storeValuesInNewCart();
-    
   }
 
   
   storeValuesInNewCart(): void {
     if (this.restnme && this.useridd) {
       this.cartser.getCartDetails(this.useridd).subscribe(
-        (data) => {
-          this.cartItem = data;
-          if (this.cartItem) {
-            const filteredMenuItems = this.cartItem.filter((item) => item.restname === this.restnme);
-            console.log(filteredMenuItems);
-            this.cartItem = filteredMenuItems;
+        (data: Addtocart[]) => {
+          if (data.length > 0) {
+            const id = data[0].cartid;
+            localStorage.setItem('mycartid', id);
+            console.log(id);
+            this.cartItem = data;
+            if (this.cartItem) {
+              const filteredMenuItems = this.cartItem.filter((item) => item.restname === this.restnme);
+              console.log(filteredMenuItems);
+              this.cartItem = filteredMenuItems;
+            }
+          } else {
+            // Handle the case when there are no cart items
           }
         },
         (error) => {
@@ -48,8 +51,8 @@ export class AddtocartComponent implements OnInit {
         }
       );
     }
-    // location.reload();
   }
+  
 
   calculateTotal() {
     let total = 0;
@@ -62,6 +65,30 @@ export class AddtocartComponent implements OnInit {
     }
     return total;
   }
+
+  deleteCart(cartid: number) {
+    this.cartser.deleteByCart(cartid).subscribe(
+      (data) => {
+        console.log('Cart deleted successfully');
+        this.cartItem = this.cartItem.filter((item) => item.cartid !== cartid);
+      },
+      (error) => {
+        console.error(error); // Log the complete error object
+      }
+    );
+  }
+  
+  
+
+  checkOut(){
+    if(this.cartItem.length>0){
+      this.router.navigate(['/payment']);
+    }
+    else{
+      alert('Nothing in cart');
+    }
+  }
+  
 
   calculateQuantity() {
     let qty = 0;

@@ -25,6 +25,7 @@ export class KitchenmainComponent {
   orders:Addtocart[]=[];
   orderItem:any;
   searchQuery!:string;
+  restname: string = localStorage.getItem('myrestauname') || '';
   // CartService: any;
   constructor(private cart:RestaurantService){}
   ngOnInit(): void {
@@ -49,7 +50,7 @@ export class KitchenmainComponent {
   private fetchOrders(): void {
     this.cart.getAllOrder().subscribe(
       (data: any[]) => {
-        this.orderItem = data;
+        this.orderItem = data.filter(order=>order.restname===this.restname);
         this.orders = [...this.orderItem];
       },
       (error: any) => {
@@ -57,26 +58,7 @@ export class KitchenmainComponent {
       }
     );
   }
-  
 
-// search(){
-//   if(this.searchQuery){
-//     this.orders=this.orderItem.filter(
-//       (fd:any) =>
-//         fd.prodname.toLowerCase().includes(this.searchQuery.toLowerCase())
-//     );
-//   }else{
-//     this.orders=[...this.orderItem];
-//   }
-// }
-
-
-//   private fetchOrders(){
-//     this.cart.getAllOrder().subscribe(data=>{
-//       this.orders=data;
-//       console.log(this.orders);
-//     });
-//   }
 
   changeStatus(order: Addtocart) {
     
@@ -90,10 +72,8 @@ export class KitchenmainComponent {
         // Update order status to "Ready"
         order.status = 'Ready';
       }
+      location.reload();  
     })
-    location.reload(); 
-    // location.reload(forceGet) ---> this will reload page from server otherwise site is loaded from cache 
-
   }
 
 

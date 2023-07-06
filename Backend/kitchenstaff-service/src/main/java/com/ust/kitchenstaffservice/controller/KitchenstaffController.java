@@ -26,14 +26,14 @@ public class KitchenstaffController {
         return ResponseEntity.ok(service.addOrders(kitchen));
     }
 
-    @GetMapping("/orders")
-    public ResponseEntity<List<Cart>> getAllOrders(){
-        return controllerConsumer.getAllOrders();
+    @GetMapping("/sortbystatus")
+    public ResponseEntity<List<Kitchenstaff>> getByStatus(){
+        return service.getByStatus();
     }
 
-    @GetMapping("/sortbystatus")
-    public ResponseEntity<List<Cart>> getByStatus(){
-        return controllerConsumer.getByStatus();
+    @GetMapping("/getbyuserid/{userid}")
+    public ResponseEntity<List<Kitchenstaff>> getByUserId(@PathVariable Long userid){
+        return ResponseEntity.ok(service.getOrderByUserId(userid));
     }
 
     //get item by res
@@ -44,7 +44,7 @@ public class KitchenstaffController {
 
     @PutMapping("/orders/{cartid}")
     public ResponseEntity<?> updateStatus(@PathVariable Long cartid) throws CartNotFoundException {
-        return controllerConsumer.updateStatus(cartid);
+        return ResponseEntity.ok(service.updateStatus(cartid));
     }
 
 }

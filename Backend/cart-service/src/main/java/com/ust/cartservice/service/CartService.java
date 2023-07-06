@@ -182,4 +182,12 @@ public class CartService {
     public List<Cart> getByStatus() {
         return cartRepo.getByStatus();
     }
+
+    public void deleteByUserId(Long userid) {
+        cartRepo.deleteByUserid(userid);
+    }
+
+    public void deleteByCartId(Long cartid) {
+        cartRepo.deleteByCartid(cartid);
+    }
 }

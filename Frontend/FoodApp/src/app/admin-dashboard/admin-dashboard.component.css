@@ -150,4 +150,19 @@ body {
   .router-container {
     padding: 20px;
   }
+
+  .logout-btn{
+    color:#fff;
+    margin-right:25px;
+  }
+
+  .logout-btn:hover{
+    color:#000;
+  }
+
+  .dashboard-item {
+    font-weight: bold;
+    color: #fff;
+  }
+  
   

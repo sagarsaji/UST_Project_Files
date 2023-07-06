@@ -51,12 +51,12 @@ export class LoginComponent implements OnInit {
           localStorage.setItem('token', this.submitMessage);
           localStorage.setItem('username',this.login.userName);
           this.flag = true;
-          this.setAuthenticated(true);
+          this.authservice.setAuthenticated(true);
           this.userid = data.user.userid;
           localStorage.setItem('myuseridd', this.userid);
 
           this.userAuthService.setRoles(data.user.role);
-          this.userAuthService.setToken(data.jwtToken);
+          this.userAuthService.setToken(data.user.jwtToken);
 
           const role = data.user.role[0].roleName;
           if(role==='User'){
@@ -74,18 +74,10 @@ export class LoginComponent implements OnInit {
     );
   }
 
-  isAuthenticatedUser() {
-    return this.isAuthenticated;
-  }
-
-  setAuthenticated(status: boolean): void {
-    this.isAuthenticated = status;
-  }
+ 
 
   logout() {
-    this.setAuthenticated(false);
-    localStorage.removeItem('token');
-    this.route.navigate(['/login']);
+    this.authservice.logout();
   }
 
   idnum = localStorage.getItem('myuseridd');

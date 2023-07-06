@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.transaction.Transactional;
 import javax.ws.rs.Path;
 import java.util.List;
 
@@ -66,10 +67,24 @@ public class CartController {
         return new ResponseEntity<Cart>(c, HttpStatus.OK);
     }
 
-    @DeleteMapping("/del/{cartId}/{userId}")
+    @DeleteMapping("/del/{cartid}/{userid}")
     public ResponseEntity<String> deleteCart(@PathVariable Long cartid, @PathVariable Long userid) {
         cartServ.deleteCartByCartIdAndUserId(cartid, userid);
         return ResponseEntity.ok("Cart deleted successfully.");
+    }
+
+    @DeleteMapping("/del/{userid}")
+    @Transactional
+    public ResponseEntity<Void> deleteItem(@PathVariable Long userid){
+        cartServ.deleteByUserId(userid);
+        return ResponseEntity.ok().build();
+    }
+
+    @DeleteMapping("/del/cart/{cartid}")
+    @Transactional
+    public ResponseEntity<Void> deleteByCart(@PathVariable Long cartid){
+        cartServ.deleteByCartId(cartid);
+        return ResponseEntity.ok().build();
     }
 
 

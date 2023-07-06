@@ -21,6 +21,7 @@ import { ForbiddenComponent } from './forbidden/forbidden.component';
 import { PaymentComponent } from './user-dashboard/payment/payment.component';
 import { KitchenloginComponent } from './kitchenstaff-dashboard/kitchenlogin/kitchenlogin.component';
 import { KitchenmainComponent } from './kitchenstaff-dashboard/kitchenmain/kitchenmain.component';
+import { UserordersComponent } from './user-dashboard/userorders/userorders.component';
 
 
 
@@ -28,7 +29,7 @@ const routes: Routes = [
   {path:'',component:UserDashboardComponent},
   {path:'login', component: LoginComponent},
   {path:'signup', component: SignupComponent},
-  {path:'user', component: UserpageComponent,canActivate:[AuthGuard], data:{roles:['User']}},
+  {path:'user', component: UserpageComponent},
   {path:'kitchen', component: KitchenmainComponent,canActivate:[AuthGuard], data:{roles:['KitchenStaff']}},
   {path:'create',component:CreateComponent,canActivate:[AuthGuard], data:{roles:['Admin']}},
   {path:'product',component:ListComponent,canActivate:[AuthGuard], data:{roles:['Admin']}},
@@ -44,7 +45,8 @@ const routes: Routes = [
   {path:`viewmenuuser/:restname`,component:MenuuserComponent,canActivate:[AuthGuard], data:{roles:['User']}},
   {path:'forbidden',component:ForbiddenComponent},
   {path:'payment',component:PaymentComponent},
-  {path:'kitchenstaff/login',component:KitchenloginComponent}
+  {path:'kitchenstaff/login',component:KitchenloginComponent},
+  {path:'myorders',component:UserordersComponent}
 ];
 
 @NgModule({

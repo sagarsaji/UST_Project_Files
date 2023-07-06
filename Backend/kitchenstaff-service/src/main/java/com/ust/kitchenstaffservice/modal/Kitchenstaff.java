@@ -12,13 +12,15 @@ public class Kitchenstaff {
     @Id
     @GeneratedValue
     private int id;
+    private long cartid;
     private Long userid;
     private String restname;
     private String prodname;
     private String status;
 
-    public Kitchenstaff(int id, Long userid, String restname, String prodname, String status) {
+    public Kitchenstaff(int id,long cartid,Long userid, String restname, String prodname, String status) {
         this.id = id;
+        this.cartid=cartid;
         this.userid = userid;
         this.restname = restname;
         this.prodname = prodname;
@@ -31,6 +33,14 @@ public class Kitchenstaff {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public long getCartid() {
+        return cartid;
+    }
+
+    public void setCartid(long cartid) {
+        this.cartid = cartid;
     }
 
     public Long getUserid() {

@@ -18,7 +18,8 @@
       <li class="logo"><a href="#" routerLink=''>MealsDrop</a></li>
       <li class="item"><a href="#" routerLink=''>Home</a></li>
       <li class="item"><a href="#" routerLink="/about">About</a></li>
-      <li class="item"><a href="#" routerLink="/addtocart" (click)="toggleCart()">Cart</a></li>
+      <li class="item"><a href="#" routerLink="/addtocart" *ngIf="isLoggedIn()">Cart</a></li>
+      <li class="item"><a href="#" routerLink="/myorders" *ngIf="isLoggedIn()">Orders</a></li>
      
       <li class="item button">
         <button *ngIf="!isLoggedIn()" class="nav-link btn solid-button" (click)="toggleLogin()">Login</button>

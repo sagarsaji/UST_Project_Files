@@ -1,10 +1,17 @@
-<nav class="navbar navbar-expand-lg">
-    <a class="navbar-brand">FoodApp - {{restname}}</a>
-    <div class="navbar-collapse justify-content-end">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link" href="#">Logout</a>
-        </li>
-      </ul>
-    </div>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand mr-auto" style="margin-left: 6%;" *ngIf="!isAuthenticatedUser()">FoodApp - KITCHENSTAFF LOGIN</a>
+  <a class="navbar-brand mr-auto" style="margin-left: 6%;" *ngIf="isAuthenticatedUser()">FoodApp - {{restname}}</a>
+  
+  
+  
+<div class="navbar-collapse justify-content-end">
+    <ul class="navbar-nav">
+      <li class="dashboard-item" *ngIf="!isAuthenticatedUser()">
+        <a routerLink="/user" style="text-decoration: none; color: white; margin-right: 100px;">User</a> 
+      </li>
+      <li class="nav-item">
+        <button class="nav-link btn btn-primary btn-outline-light logout-btn" *ngIf="isAuthenticatedUser()" (click)="logout()">Logout</button>
+      </li>       
+    </ul>
+  </div>
 </nav>

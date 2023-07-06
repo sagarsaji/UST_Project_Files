@@ -33,18 +33,9 @@ export class NavbaruserComponent {
       if (this.isLoggedIn()) {
         this.authservice.setAuthenticated(false);
         this.authservice.logout();
-        this.sharemenu.clearMenu();
       } else {
         this.router.navigate(['/login']);
       }
     }
 
-    toggleCart() {
-      if (this.isLoggedIn()===false) {
-        this.authservice.setAuthenticated(false);
-        this.router.navigate(['/login']);
-      } else {
-        this.router.navigate(['/addtocart']);
-      }
-    }
 }

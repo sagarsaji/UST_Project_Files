@@ -34,6 +34,7 @@ import { PaymentComponent } from './user-dashboard/payment/payment.component';
 import { KitchenloginComponent } from './kitchenstaff-dashboard/kitchenlogin/kitchenlogin.component';
 import { CommonModule } from '@angular/common';
 import { KitchenmainComponent } from './kitchenstaff-dashboard/kitchenmain/kitchenmain.component';
+import { UserordersComponent } from './user-dashboard/userorders/userorders.component';
 
 
 
@@ -67,7 +68,8 @@ import { KitchenmainComponent } from './kitchenstaff-dashboard/kitchenmain/kitch
     ForbiddenComponent,
     PaymentComponent,
     KitchenloginComponent,
-    KitchenmainComponent
+    KitchenmainComponent,
+    UserordersComponent
   ],
   imports: [
     BrowserModule,

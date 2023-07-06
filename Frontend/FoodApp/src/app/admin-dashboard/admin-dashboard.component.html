@@ -3,14 +3,20 @@
     <a class="navbar-brand" href="#">FoodApp - ADMIN</a>
     <div class="navbar-collapse justify-content-end">
       <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link" href="#" (click)="adminLogout()">Logout</a>
+        <li class="dashboard-item"  *ngIf="!isAuthenticatedUser()">
+          <a routerLink="/user">User</a> 
         </li>
+        <li class="dashboard-item"  *ngIf="!isAuthenticatedUser()">
+          <a routerLink="/kitchenstaff/login">Kitchen</a> 
+        </li>
+        <li class="nav-item">
+          <button class="nav-link btn btn-primary btn-outline-light logout-btn" *ngIf="isAuthenticatedUser()" (click)="adminLogout()">Logout</button>
+        </li>       
       </ul>
     </div>
   </nav>
 
-  <div class="button-container">
+  <div class="button-container" *ngIf="isAuthenticatedUser()">
     <div class="button" routerLink="/create">
       <i class="fas fa-utensils"></i> Add Restaurant
     </div>

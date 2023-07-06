@@ -34,7 +34,7 @@ export class MenuuserComponent {
     this.restn = this.route.snapshot.params['restname'];
     this.restname = this.restn;
     this.fetchSpecificRestaurantMenu(this.restname);
-    this.useridd = this.user.retrieveUserId();
+    this.useridd = localStorage.getItem('myuseridd');
   }
 
   fetchSpecificRestaurantMenu(restname: string) {
