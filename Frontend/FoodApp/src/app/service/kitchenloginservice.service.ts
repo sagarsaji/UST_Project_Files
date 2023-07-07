@@ -9,7 +9,7 @@ export class KitchenloginserviceService {
     this.checkAuthentication();
    }
 
-  private isAuthenticated:boolean=false;
+  public isAuthenticated:boolean=false;
 
   isAuthenticatedUser(){
     return this.isAuthenticated;

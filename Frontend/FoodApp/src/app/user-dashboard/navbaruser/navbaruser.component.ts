@@ -40,6 +40,9 @@ export class NavbaruserComponent {
       }
     }
 
+   toCart(){
+    this.router.navigate(['/addtocart']);
+   }
    
 
 }

@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserAuthService } from 'src/app/authservice/user-auth.service';
 import { Login } from 'src/app/modal/login';
 import { AdminloginserviceService } from 'src/app/service/adminloginservice.service';
 import { AuthenticateServiceService } from 'src/app/service/authenticate-service.service';
+import { KitchenloginserviceService } from 'src/app/service/kitchenloginservice.service';
 import { RouterServiceService } from 'src/app/service/router-service.service';
 
 @Component({
@@ -23,13 +24,15 @@ export class AdminloginComponent {
 
   constructor(private routerService: RouterServiceService, 
     private authservice: AuthenticateServiceService,private route:Router,
-    private userAuthService: UserAuthService,private auth:AdminloginserviceService) {
+    private userAuthService: UserAuthService,private auth:AdminloginserviceService,
+    private kitchen:KitchenloginserviceService) {
 
     this.adminForm = new FormGroup({
       username: new FormControl(),
       password: new FormControl()
     });
   }
+
 
   onSubmit(){
 
@@ -50,6 +53,8 @@ export class AdminloginComponent {
         localStorage.setItem("key", this.submitMessage);
         this.flag = true;
         this.auth.isAuthenticated=true;
+        this.kitchen.setAuthenticated(false);
+        this.authservice.setAuthenticated(false);
         
         this.userAuthService.setRoles(data.user.role);
         this.userAuthService.setToken(data.jwtToken);
@@ -71,6 +76,7 @@ export class AdminloginComponent {
   }
 
  
+  
 
 
     
