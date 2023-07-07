@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 export class KitchenloginserviceService {
 
   constructor() {
-    
+    this.checkAuthentication();
    }
 
   private isAuthenticated:boolean=false;

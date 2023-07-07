@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 export class AdminloginserviceService {
 
   constructor() { 
-    
+    this.checkAuthentication();
   }
 
   public isAuthenticated:boolean=false;

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AdminloginComponent } from './adminlogin/adminlogin.component';
 import { Router } from '@angular/router';
 import { AdminloginserviceService } from '../service/adminloginservice.service';
+import { AuthenticateServiceService } from '../service/authenticate-service.service';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -11,7 +12,8 @@ import { AdminloginserviceService } from '../service/adminloginservice.service';
 export class AdminDashboardComponent implements OnInit{
 
   
-  constructor(private route:Router,private auth:AdminloginserviceService){}
+  constructor(private route:Router,private auth:AdminloginserviceService,
+    private log:AuthenticateServiceService){}
 
   ngOnInit(): void {
     this.isAuthenticatedUser();
@@ -21,10 +23,15 @@ export class AdminDashboardComponent implements OnInit{
     console.log(this.auth.isAuthenticatedUser());
     return this.auth.isAuthenticated;
   }
+
+  isLoggedIn(){
+    return this.log.isAuthenticated();
+  }
   
 
   adminLogout() {
     this.auth.isAuthenticated=false;
+    this.log.setAuthenticated(false);
     localStorage.clear();
     this.route.navigate(['/admin/login']);
   }

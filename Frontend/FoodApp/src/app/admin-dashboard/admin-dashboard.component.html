@@ -3,7 +3,7 @@
     <a class="navbar-brand" href="#">FoodApp - ADMIN</a>
     <div class="navbar-collapse justify-content-end">
       <ul class="navbar-nav">
-        <li class="dashboard-item"  *ngIf="!isAuthenticatedUser()">
+        <li class="dashboard-item" *ngIf="!isAuthenticatedUser() && !isLoggedIn()">
           <a routerLink="/user">User</a> 
         </li>
         <li class="dashboard-item"  *ngIf="!isAuthenticatedUser()">

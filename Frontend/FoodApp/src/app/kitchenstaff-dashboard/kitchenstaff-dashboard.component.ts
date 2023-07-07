@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { KitchenloginserviceService } from '../service/kitchenloginservice.service';
+import { AuthenticateServiceService } from '../service/authenticate-service.service';
 
 @Component({
   selector: 'app-kitchenstaff-dashboard',
@@ -9,7 +10,8 @@ import { KitchenloginserviceService } from '../service/kitchenloginservice.servi
 })
 export class KitchenstaffDashboardComponent {
 
-  constructor(private route:Router,private auth:KitchenloginserviceService){}
+  constructor(private route:Router,private auth:KitchenloginserviceService,
+    private log:AuthenticateServiceService){}
 
 
   restname: string = localStorage.getItem('myrestauname') || '';
@@ -19,8 +21,13 @@ export class KitchenstaffDashboardComponent {
     return this.auth.isAuthenticatedUser();
   }
 
+  isLoggedIn(){
+    return this.log.isAuthenticated();
+  }
+
   logout(){
     this.auth.setAuthenticated(false);
+    this.log.setAuthenticated(false);
     localStorage.clear();
     this.route.navigate(['/kitchenstaff/login']);
   }
