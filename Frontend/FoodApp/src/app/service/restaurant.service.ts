@@ -60,8 +60,8 @@ export class RestaurantService {
     return this.http.post(`http://localhost:8084/api/v1/menu/addmenu`,menu);
   }
 
-  getCartDetails(username: any): Observable<Addtocart[]> {
-    return this.http.get<Addtocart[]>(`http://localhost:8082/api/v1/cart/viewByuser/${username}`);
+  getCartDetails(userid: any): Observable<Addtocart[]> {
+    return this.http.get<Addtocart[]>(`http://localhost:8082/api/v1/cart/viewByuser/${userid}`);
   }
 
   updateMenu(mid:number,menu:Menu):Observable<Object>{

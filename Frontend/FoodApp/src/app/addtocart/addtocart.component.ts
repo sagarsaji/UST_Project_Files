@@ -1,9 +1,7 @@
 import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Addtocart } from '../modal/addtocart';
-import { Menu } from '../modal/menu';
 import { RestaurantService } from '../service/restaurant.service';
-import { SharedmenuserviceService } from '../service/sharedmenuservice.service';
 import { AuthenticateServiceService } from '../service/authenticate-service.service';
 
 @Component({
@@ -20,36 +18,27 @@ export class AddtocartComponent implements OnInit {
   
   cartItem:Addtocart[] = [];
   useridd = this.user.retrieveUserId();
-  //useridd = localStorage.getItem('myuseridd');
   restnme = localStorage.getItem('restaurantname');
 
+  
   ngOnInit(): void {
-    this.storeValuesInNewCart();
+    this.route.params.subscribe(() => {
+      this.useridd = this.user.retrieveUserId();
+      this.restnme = localStorage.getItem('restaurantname');
+      this.storeValuesInNewCart();
+    });
   }
 
-  
   storeValuesInNewCart(): void {
-    if (this.restnme && this.useridd) {
+    if(this.useridd){
       this.cartser.getCartDetails(this.useridd).subscribe(
-        (data: Addtocart[]) => {
-          if (data.length > 0) {
-            const id = data[0].cartid;
-            localStorage.setItem('mycartid', id);
-            console.log(id);
-            this.cartItem = data;
-            if (this.cartItem) {
-              const filteredMenuItems = this.cartItem.filter((item) => item.restname === this.restnme);
-              console.log(filteredMenuItems);
-              this.cartItem = filteredMenuItems;
-            }
-          } else {
-            // Handle the case when there are no cart items
-          }
+        (data)=>{
+          this.cartItem=data.filter(item=>item.restname===this.restnme);
         },
         (error) => {
           console.log(error);
         }
-      );
+      )
     }
   }
   
@@ -85,7 +74,7 @@ export class AddtocartComponent implements OnInit {
       this.router.navigate(['/payment']);
     }
     else{
-      alert('Nothing in cart');
+      
     }
   }
   
@@ -100,20 +89,7 @@ export class AddtocartComponent implements OnInit {
     return qty;
   }
   
-  
 
-  
-
-  checkLog(): void {
-    if (!this.service.isAuthenticated()) {
-      this.router.navigate(['/login']);
-    } else {
-      this.storeValuesInNewCart();
-    }
-  }
-
-  
-  
   increment(cartid: number){
     this.cartser.updateIncrement(cartid).subscribe(
       (data) => {

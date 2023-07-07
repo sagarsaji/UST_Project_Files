@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginComponent } from 'src/app/login/login.component';
+import { Addtocart } from 'src/app/modal/addtocart';
 import { AuthenticateServiceService } from 'src/app/service/authenticate-service.service';
+import { RestaurantService } from 'src/app/service/restaurant.service';
 import { SharedmenuserviceService } from 'src/app/service/sharedmenuservice.service';
 
 @Component({
@@ -12,7 +14,7 @@ import { SharedmenuserviceService } from 'src/app/service/sharedmenuservice.serv
 export class NavbaruserComponent {
 
   constructor(private router:Router,private authservice:AuthenticateServiceService,
-    private sharemenu:SharedmenuserviceService){}
+    private sharemenu:SharedmenuserviceService,private cartser:RestaurantService){}
 
   // checkLogin(){
   //   if(!this.service.isAuthenticated()){
@@ -37,5 +39,7 @@ export class NavbaruserComponent {
         this.router.navigate(['/login']);
       }
     }
+
+   
 
 }
