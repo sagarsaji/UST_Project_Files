@@ -10,13 +10,13 @@
           <a routerLink="/kitchenstaff/login">Kitchen</a> 
         </li>
         <li class="nav-item">
-          <button class="nav-link btn btn-primary btn-outline-light logout-btn" *ngIf="isAuthenticatedUser()" (click)="adminLogout()">Logout</button>
+          <button class="nav-link btn btn-primary btn-outline-light logout-btn" *ngIf="isAuthenticatedUser() && !isLoggedIn()" (click)="adminLogout()">Logout</button>
         </li>       
       </ul>
     </div>
   </nav>
 
-  <div class="button-container" *ngIf="isAuthenticatedUser()">
+  <div class="button-container" *ngIf="isAuthenticatedUser() && !isLoggedIn()">
     <div class="button" routerLink="/create">
       <i class="fas fa-utensils"></i> Add Restaurant
     </div>

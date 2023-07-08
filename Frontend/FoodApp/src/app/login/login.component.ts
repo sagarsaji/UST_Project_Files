@@ -5,6 +5,8 @@ import { Login } from '../modal/login';
 import { AuthenticateServiceService } from '../service/authenticate-service.service';
 import { RouterServiceService } from '../service/router-service.service';
 import { UserAuthService } from '../authservice/user-auth.service';
+import { AdminloginserviceService } from '../service/adminloginservice.service';
+import { KitchenloginserviceService } from '../service/kitchenloginservice.service';
 
 @Component({
   selector: 'app-login',
@@ -25,7 +27,9 @@ export class LoginComponent implements OnInit {
     private routerService: RouterServiceService,
     private authservice: AuthenticateServiceService,
     private route: Router,
-    private userAuthService:UserAuthService
+    private userAuthService:UserAuthService,
+    private admin:AdminloginserviceService,
+    private kitchen:KitchenloginserviceService
   ) {
     this.loginForm = new FormGroup({
       username: new FormControl(),
@@ -52,6 +56,8 @@ export class LoginComponent implements OnInit {
           localStorage.setItem('username',this.login.userName);
           this.flag = true;
           this.authservice.setAuthenticated(true);
+          this.admin.setAuthenticated(false);
+          this.kitchen.setAuthenticated(false);
           this.userid = data.user.userid;
           localStorage.setItem('myuseridd', this.userid);
 

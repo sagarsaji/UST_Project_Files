@@ -6,6 +6,7 @@ import { Login } from 'src/app/modal/login';
 import { AuthenticateServiceService } from 'src/app/service/authenticate-service.service';
 import { KitchenstaffDashboardComponent } from '../kitchenstaff-dashboard.component';
 import { KitchenloginserviceService } from 'src/app/service/kitchenloginservice.service';
+import { AdminloginserviceService } from 'src/app/service/adminloginservice.service';
 
 @Component({
   selector: 'app-kitchenlogin',
@@ -19,7 +20,8 @@ export class KitchenloginComponent implements OnInit{
 
   constructor(private formBuilder: FormBuilder,private authservice:AuthenticateServiceService,
     private route:Router,private userAuthService:UserAuthService,
-    private auth:KitchenloginserviceService) { }
+    private auth:KitchenloginserviceService,
+    private admin:AdminloginserviceService) { }
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
@@ -43,6 +45,8 @@ export class KitchenloginComponent implements OnInit{
 
       if (data != null) {
         this.auth.setAuthenticated(true);
+        this.authservice.setAuthenticated(false);
+        this.admin.setAuthenticated(false);
         this.restname=data.user.userFirstName;
         localStorage.setItem('myrestauname',this.restname);
         this.userAuthService.setRoles(data.user.role);
