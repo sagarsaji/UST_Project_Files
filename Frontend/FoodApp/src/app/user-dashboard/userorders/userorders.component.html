@@ -5,13 +5,15 @@
       <thead>
         <tr>
           <th>Cart ID</th>
+          <th>Restaurant Name</th>
           <th>Food Name</th>
           <th>Status</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let order of myorder">
+        <tr *ngFor="let order of sortedorder">
           <td>{{order.cartid}}</td>
+          <td>{{order.restname}}</td>
           <td>{{order.prodname}}</td>
           <td>{{order.status}}</td>
         </tr>

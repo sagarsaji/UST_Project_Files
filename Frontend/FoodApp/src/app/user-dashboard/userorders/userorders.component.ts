@@ -14,18 +14,21 @@ export class UserordersComponent implements OnInit{
   constructor(private orderser:RestaurantService){}
 
   myorder:Orderhistory[]=[];
+  sortedorder:Orderhistory[]=[];
 
   ngOnInit(): void {
     this.getAllOrders();
   }
 
-  getAllOrders(){
+  getAllOrders() {
     this.orderser.getUserOrders(this.myid).subscribe(
-      (data:any)=>{
-        this.myorder=data;
+      (data: any) => {
+        this.myorder = data;
+        this.sortedorder = this.myorder.sort((a, b) => a.cartid - b.cartid);
         console.log(this.myorder);
       }
-    )
+    );
   }
+  
 
 }
